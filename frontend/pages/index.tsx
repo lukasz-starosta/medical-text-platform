@@ -1,6 +1,7 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import { Button } from 'antd'
+import styles from './Home.module.css'
+import { Button, Card, Col, Row } from 'antd'
+import LoginForm from '../components/LoginForm/LoginForm'
 
 export default function Home() {
   return (
@@ -11,11 +12,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <h1 className={styles.title}>MedicalTextPlatform</h1>
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">MedicalTextPlatform!</a>
-        </h1>
-        <Button type="primary">Button</Button>
+        <Row gutter={128}>
+          <Col span={12}>
+            <Card title="MedicalTextPlatform">
+              <p>Podziel się wiedzą medyczną i korzystaj z wiedzy innych!</p>
+            </Card>
+          </Col>
+          <Col span={12}>
+            <LoginForm />
+          </Col>
+        </Row>
       </main>
     </div>
   )

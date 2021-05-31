@@ -1,0 +1,11 @@
+.icon {
+  color: gray;
+}
+
+.buttons {
+  margin-top: 1rem;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

@@ -9,7 +9,7 @@ Uruchom wirtualne środowisko
 ```bash
 conda activate mtp
 ```
-Plik *main.py* jest plikiem z, które można uruchomić cały serwer wystarczy wykonać"
+Plik *main.py* jest plikiem z, którego można uruchomić cały serwer wystarczy wykonać"
 ```bash
 python3 main.py
 ```
@@ -22,4 +22,7 @@ Tesotwanie api za pomocą listonosza
 
 #### Dodawanie pojedynczego wpisu do bazy przez zapytanie POST
 ![Screenshot](images/post.png)
+
+### SQLite
+Na razie korzystamy z silnika SQLite sprzężonego z Fluskiem. W pliku db.py i game_controller.py jest wszystko :)
 

@@ -4,16 +4,9 @@ import { Card, Button } from 'antd'
 const News = () => {
   return (
     <div>
-      <Card title="Co nowego" extra={<Button type="link">Całe te</Button>}>
-        <p>Kubuś puchatek pobity w stumilowym lesie</p>
-        <p>
-          Naukowcy wiedzą czemu wilk tak wyje w księżycową noc. (i czemu ryś tak zęby szczerzy rad)
-          [ZOBACZ ZDJĘCIA]
-        </p>
-        <p>
-          Sprzedawcy RTV go nienawidzą. Poznał jeden prosty sposób na przedłużenie kabla do
-          telewizora.
-        </p>
+      <Card title="Co nowego" extra={<Button type="link">Więcej...</Button>}>
+        <p>Nowa aktualizacja wprowadza możliwość konwersacji z innymi użytkownikami</p>
+        <p>Teraz aplikacja dostępna również w języku angielskim</p>
       </Card>
     </div>
   )

@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
           <Navbar />
         </Sider>
         <Content className={layoutStyles.content}>
-          <p className={layoutStyles.title}>Tu masz prywatną policję</p>
+          <p className={layoutStyles.title}>Polityka prywatności</p>
         </Content>
       </Layout>
     </div>

@@ -13,7 +13,7 @@ const Account = () => {
           <Navbar />
         </Sider>
         <Content className={layoutStyles.content}>
-          <p className={layoutStyles.title}>O zoacz sobie jak wyglądasz</p>
+          <p className={layoutStyles.title}>Twoje konto</p>
         </Content>
       </Layout>
     </div>

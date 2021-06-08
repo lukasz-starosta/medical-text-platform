@@ -14,7 +14,7 @@ const Dashboard = () => {
           <Navbar />
         </Sider>
         <Content className={styles.content}>
-          <p className={styles.title}>No dzień dobry</p>
+          <p className={styles.title}>Dzień dobry!</p>
           <Row gutter={32} className={styles.headerContainer}>
             <Col span={8}>
               <SubscriptionInfo />

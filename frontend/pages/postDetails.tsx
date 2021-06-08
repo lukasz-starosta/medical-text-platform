@@ -13,7 +13,7 @@ const PostDetails = () => {
           <Navbar />
         </Sider>
         <Content>
-          <p className={layoutStyles.title}>Detale</p>
+          <p className={layoutStyles.title}>Szczegóły</p>
         </Content>
       </Layout>
     </div>

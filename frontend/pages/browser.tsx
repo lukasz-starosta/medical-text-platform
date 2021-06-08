@@ -16,7 +16,7 @@ const Browser = () => {
           <Navbar />
         </Sider>
         <Content className={layoutStyles.content}>
-          <p className={layoutStyles.title}>No poprzeglądaj see</p>
+          <p className={layoutStyles.title}>Przeglądaj</p>
           <Search
             className={styles.searchBar}
             placeholder="Wpisz frazę lub słowa kluczowe"

@@ -13,7 +13,7 @@ const Upload = () => {
           <Navbar />
         </Sider>
         <Content className={layoutStyles.content}>
-          <p className={layoutStyles.title}>Weź coś wrzuć</p>
+          <p className={layoutStyles.title}>Utwórz wpis</p>
         </Content>
       </Layout>
     </div>

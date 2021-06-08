@@ -1,0 +1,12 @@
+certifi
+click
+flask
+itsdangerous
+jinja2
+markupsafe
+pip
+setuptools
+vc
+werkzeug
+wheel
+wincertstore

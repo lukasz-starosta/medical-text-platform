@@ -8,7 +8,7 @@ services:
     backend:
         build: ./backend
         ports:
-            - 5001:8081
+            - 5001:8080
         depends_on:
             - database
 

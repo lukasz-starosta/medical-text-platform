@@ -14,7 +14,7 @@ COPY . .
 EXPOSE 8080
 
 # use node server.js to start your server
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD [ "python3", "src/main.py"]
 
 
 

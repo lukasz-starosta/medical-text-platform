@@ -12,9 +12,9 @@ services:
         depends_on:
             - database
 
-    frontend:
-        build: ./frontend
-        ports:
-            - 5000:8080
-        depends_on:
-            - backend
+    # frontend:
+    #     build: ./frontend
+    #     ports:
+    #         - 5000:3000
+    #     depends_on:
+    #         - backend

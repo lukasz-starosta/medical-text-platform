@@ -1,10 +1,12 @@
 certifi
 click
 flask
+flask-mysql
 itsdangerous
 jinja2
 markupsafe
 pip
+pyyaml
 setuptools
 vc
 werkzeug

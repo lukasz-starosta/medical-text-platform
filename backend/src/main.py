@@ -10,6 +10,6 @@ if __name__ == "__main__":
     Here you can change debug and port
     Remember that, in order to make this API functional, you must set debug in False
     """
-    app.run(host='0.0.0.0', port=8000, debug=False)
-    test = execute("select * from dupa")
+    app.run(host='0.0.0.0', port=8080, debug=False)
+    test = execute("select * from orders")
     print(test)

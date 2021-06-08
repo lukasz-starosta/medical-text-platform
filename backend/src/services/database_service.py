@@ -1,23 +1,21 @@
-import sqlite3
-DATABASE_NAME = "games.db"
+import yaml
+from flask_mysqldb import MySQL
 
 
-def get_db():
-    conn = sqlite3.connect(DATABASE_NAME)
-    return conn
+mysql = None
 
+def setup_db(app):
+    db = yaml.load(open('../db_config.yaml'))
+    app.config['MYSQL_HOST'] = db['mysql_host']
+    app.config['MYSQL_USER'] = db['mysql_user']
+    app.config['MYSQL_PASSWORD'] = db['mysql_password']
+    app.config['MYSQL_DB'] = db['mysql_db']
 
-def create_tables():
-    tables = [
-        """CREATE TABLE IF NOT EXISTS games(
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-				price REAL NOT NULL,
-				rate INTEGER NOT NULL
-            )
-            """
-    ]
-    db = get_db()
-    cursor = db.cursor()
-    for table in tables:
-        cursor.execute(table)
+    mysql = MySQL(app)
+    return app
+
+def execute(query):
+    cur = mysql.connection.cursor()
+    cur.execute(query)
+    mysql.connection.commit()
+    cur.close()

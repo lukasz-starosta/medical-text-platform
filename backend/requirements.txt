@@ -1,7 +1,7 @@
 certifi
 click
 flask
-flask-mysql
+flask_mysql_connector
 itsdangerous
 jinja2
 markupsafe

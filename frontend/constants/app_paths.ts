@@ -1,0 +1,7 @@
+export const HOME_PATH = '/'
+export const DASHBOARD_PATH = '/dashboard'
+export const BROWSER_PATH = '/browser'
+export const ACCOUNT_PATH = '/account'
+export const UPLOAD_PATH = '/upload'
+export const PRIVACY_PATH = '/privacyPolicy'
+export const POSTDETAILS_PATH = '/postDetails'

@@ -1,0 +1,20 @@
+version: "3"
+services:
+    database:
+        build: ./database
+        ports:
+            - 3306:3306
+
+    backend:
+        build: ./backend
+        ports:
+            - 5001:8081
+        depends_on:
+            - database
+
+    frontend:
+        build: ./frontend
+        ports:
+            - 5000:8080
+        depends_on:
+            - backend

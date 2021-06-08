@@ -1,5 +1,5 @@
 ## Opis Backendu
-Backend jest napisany w Pythonie w oparciu o framework Flusk.
+Backend jest napisany w Pythonie w oparciu o framework Flask.
 Przed uruchomieniem stwórz wirtualne środowisko np. w Condzie komendą:
 
 ```bash

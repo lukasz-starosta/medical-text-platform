@@ -1,4 +1,4 @@
-mysql_host: '127.0.0.1'
+mysql_host: '127.0.0.1:3306'
 mysql_user: 'root'
-mysql_password: '1234'
-mysql_db: 'flaskapp'
+mysql_password: 'mtp'
+mysql_db: 'mtp'

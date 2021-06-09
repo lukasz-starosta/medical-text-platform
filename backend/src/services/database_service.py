@@ -5,7 +5,8 @@ import os
 mysql = None
 
 def setup_db(app):
-    db = yaml.load(open('src/services/db_config.yaml'))
+    #zmieniałem scieżkę bo wyrzucało mi błąd jak uruchamiałem z main.py
+    db = yaml.load(open('services/db_config.yaml'))
     app.config['MYSQL_HOST'] = db['mysql_host']
     app.config['MYSQL_USER'] = db['mysql_user']
     app.config['MYSQL_PASSWORD'] = db['mysql_password']

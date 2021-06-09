@@ -1,15 +1,21 @@
-from flask import Flask, jsonify, request
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from flask_cors import CORS
 import jwt
 import datetime
-from services.database_service import setup_db, execute
+from services.database_service import setup_db
+from controllers.search_controller import search
+from controllers.login_controller import loginAndGenerateToken
 
 app = Flask(__name__)
 CORS(app)
-import sites.login.login_mapping
-if __name__ == "__main__":
-    app = setup_db(app)
-    app.run(host='0.0.0.0', port=8080, debug=False)
-    test = execute("select * from orders")
-    print(test)
+setup_db(app)
+
+############### AUTH ###############
+@app.route('/auth/login', methods=['POST'])
+def run():
+    return loginAndGenerateToken()
+
+############### BROWSER ###############
+@app.route('/browser/<content>', methods=['GET'])
+def browse(content):
+    return search(content)

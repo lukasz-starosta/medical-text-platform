@@ -1,44 +1,50 @@
-from db import get_db
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import jwt
+import datetime
 
+def encodeAuthToken(user_id, groups=[]):
+    try:
+        admin = True if 'admin' in groups else False
 
-def insert_game(name, price, rate):
-    db = get_db()
-    cursor = db.cursor()
-    statement = "INSERT INTO games(name, price, rate) VALUES (?, ?, ?)"
-    cursor.execute(statement, [name, price, rate])
-    db.commit()
-    return True
+        payload = {
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=60),
+            'iat': datetime.datetime.utcnow(),
+            'sub': user_id,
+            'admin': admin
+        }
+        token = jwt.encode(payload, 'super-secret-key', algorithm='HS256')
+        return token
+    except Exception as e:
+        print(e)
+        return e
+    
+def loginAndGenerateToken():
+    valid_user_1 = {'username': "test_user_1", 'password': 'Happy123'}
+    valid_user_2 = {'username': 'test_admin', 'password': 'LessHappy123'}
 
+    req_json = request.get_json()
+    print("Data",request.data)
+    print("Json", request.json)
+    username = req_json['username']
+    print(username)
+    password = req_json['password']
+    print(password)
 
-def update_game(id, name, price, rate):
-    db = get_db()
-    cursor = db.cursor()
-    statement = "UPDATE games SET name = ?, price = ?, rate = ? WHERE id = ?"
-    cursor.execute(statement, [name, price, rate, id])
-    db.commit()
-    return True
+    try:
+        if username == valid_user_1['username'] and password == valid_user_1['password']:
+            token = encodeAuthToken(1)
 
+        if username == valid_user_2['username'] and password == valid_user_2['password']:
+            token = encodeAuthToken(2, ['admin'])
 
-def delete_game(id):
-    db = get_db()
-    cursor = db.cursor()
-    statement = "DELETE FROM games WHERE id = ?"
-    cursor.execute(statement, [id])
-    db.commit()
-    return True
-
-
-def get_by_id(id):
-    db = get_db()
-    cursor = db.cursor()
-    statement = "SELECT id, name, price, rate FROM games WHERE id = ?"
-    cursor.execute(statement, [id])
-    return cursor.fetchone()
-
-
-def get_games():
-    db = get_db()
-    cursor = db.cursor()
-    query = "SELECT id, name, price, rate FROM games"
-    cursor.execute(query)
-    return cursor.fetchall()
+        print(token)
+        return jsonify(result = {
+            'status': 'success',
+            'auth_token': token
+        })
+    except Exception as e:
+        return jsonify({
+            'status': 'Failure',
+            'error': e
+        })

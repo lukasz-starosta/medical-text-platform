@@ -26,3 +26,23 @@ Tesotwanie api za pomocą listonosza
 ### SQLite
 Na razie korzystamy z silnika SQLite sprzężonego z Fluskiem. W pliku db.py i game_controller.py jest wszystko :)
 
+## Endpointy do implementacji
+| Endpoint           | Method | Request                       | Response                                               | Opis                                                                              |
+|--------------------|--------|-------------------------------|--------------------------------------------------------|-----------------------------------------------------------------------------------|
+| AUTH               |        |                               |                                                        |                                                                                   |
+| /login             | POST   | login, password               | ok, token / not ok                                     | logowanie się użytkownika                                                         |
+| /register          | POST   | login, password               | ok, token / not ok                                     | rejestracja użytkownika                                                           |
+| /check             | POST   | token                         | ok / not ok                                            | walidacja użytkownika (czy ma ważny token po np. 2 dniach bez wchodzenia do apki) |
+| /logout            | POST   | token                         | ok / not ok                                            | wylogowywanie                                                                     |
+|                    |        |                               |                                                        |                                                                                   |
+| DASHBOARD          |        |                               |                                                        |                                                                                   |
+|                    |        |                               |                                                        |                                                                                   |
+| PRZEGLĄDAJ         |        |                               |                                                        |                                                                                   |
+| /search?query=     | GET    | query (najpierw plain string) | rezultaty - do ustalenia                               | Wyszukiwarka                                                                      |
+|                    |        |                               |                                                        |                                                                                   |
+| KONTO              |        |                               |                                                        |                                                                                   |
+| /user-info?userId= | GET    | userId                        | informacje o użytkowniku + jego wpisy (jak na froncie) | Informacje o użytkowniku                                                          |
+| /change-password   | POST   | password                      | ok / not ok                                            | Zmiana hasła                                                                      |
+|                    |        |                               |                                                        |                                                                                   |
+| UTWÓRZ WPIS        |        |                               |                                                        |                                                                                   |
+| /create            | POST   | dane z formularza             | ok / not ok                                            | Wgrywanie danych                                                                  |

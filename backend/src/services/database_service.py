@@ -21,7 +21,7 @@ def execute_post(query):
     cur.execute(query)
     mysql.connection.commit()
     cur.close()
-    return "OK"
+    return True
 
 def execute_get(query):
     cur = mysql.connection.cursor()

@@ -7,6 +7,7 @@ from services.database_service import setup_db
 from controllers.entry_controller import create_entry
 from controllers.search_controller import search
 from controllers.login_controller import loginAndGenerateToken
+from controllers.account_controller import fetch_user_info, change_password
 
 app = Flask(__name__)
 CORS(app)
@@ -17,40 +18,39 @@ message_todo = {'message': 'TODO'}
 
 ############### AUTH ###############
 @app.route('/login', methods=['POST'])
-def login():
+def login_endpoint():
     return loginAndGenerateToken()
 
 @app.route('/register', methods=['POST'])
-def register():
+def register_endpoint():
     return jsonify(message_todo)
 
 @app.route('/check', methods=['POST'])
-def check():
+def check_endpoint():
     return jsonify(message_todo)
 
 @app.route('/logout', methods=['POST'])
-def logout():
+def logout_endpoint():
     return jsonify(message_todo)
 
 ############### BROWSER ###############
 @app.route('/search', methods=['GET'])
-def browse():
+def browse_endpoint():
     content = request.args.get('query', type=str)
     return search(content)
 
 ############### ACCOUNT ###############
 @app.route('/user-info', methods=['GET'])
-def user_info():
-    id = request.args.get('userId', type=int)
-    return jsonify(message_todo)
+def user_info_endpoint():
+    return fetch_user_info(request.json)
 
 @app.route('/change-password', methods=['POST'])
-def change_password():
-    return jsonify(message_todo)
+def change_password_endpoint():
+    return change_password(request.json)
 
 ############### ENTRY ###############
 @app.route('/create', methods=['POST'])
-def create():
+def create_endpoint():
     if create_entry(request.json):
         return jsonify(message_ok)
     else: abort(406)

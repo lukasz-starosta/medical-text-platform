@@ -8,7 +8,7 @@ services:
     backend:
         build: 
             context: ./backend
-            target: debug
+            target: prod
         ports:
             - 5001:8080
             - 5678:5678

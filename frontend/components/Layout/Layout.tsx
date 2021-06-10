@@ -1,4 +1,4 @@
-import { Layout as AntLayout } from 'antd'
+import { Layout as AntLayout, Typography } from 'antd'
 import { Content } from 'antd/lib/layout/layout'
 import Sider from 'antd/lib/layout/Sider'
 import Navbar from '../Navbar/Navbar'
@@ -15,7 +15,7 @@ export const Layout: FC<Props> = ({ title, children }) => (
       <Navbar />
     </Sider>
     <Content className={styles.content}>
-      {title && <p className={styles.title}>{title}</p>}
+      {title && <Typography.Title level={2}>{title}</Typography.Title>}
       {children}
     </Content>
   </AntLayout>

@@ -1,0 +1,16 @@
+certifi
+click
+flask
+flask_mysql_connector
+flask_cors
+itsdangerous
+jinja2
+markupsafe
+pip
+pyyaml
+setuptools
+vc
+werkzeug
+wheel
+wincertstore
+jwt

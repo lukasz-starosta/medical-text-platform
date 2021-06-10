@@ -36,7 +36,7 @@ def logout():
 @app.route('/search', methods=['GET'])
 def browse():
     content = request.args.get('query', type=str)
-    return jsonify(search(content))
+    return search(content)
 
 ############### ACCOUNT ###############
 @app.route('/user-info', methods=['GET'])

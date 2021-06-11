@@ -9,9 +9,15 @@ import {
   HOME_PATH,
   PRIVACY_PATH,
 } from '../../constants/app_paths'
+import { API_LOGOUT_PATH } from '../../constants/api_paths'
 
 const Navbar = () => {
   const router = useRouter()
+
+  const handleLogout = async () => {
+    await fetch(API_LOGOUT_PATH, {method: 'POST'})
+    router.push(HOME_PATH)
+  }
 
   const onButtonClick = (route: string) => {
     router.push(route)
@@ -37,7 +43,7 @@ const Navbar = () => {
         </Button>
       </div>
       <div className={styles.footer}>
-        <Button className={styles.button} onClick={() => onButtonClick(HOME_PATH)}>
+        <Button className={styles.button} onClick={handleLogout}>
           Wyloguj
         </Button>
         <Button

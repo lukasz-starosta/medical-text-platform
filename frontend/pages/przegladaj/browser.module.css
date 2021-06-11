@@ -18,3 +18,7 @@
 .headerContainer {
   margin-top: 60px;
 }
+
+.searchBar {
+  width: 500px;
+}

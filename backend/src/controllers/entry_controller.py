@@ -9,4 +9,4 @@ def create_entry(content):
     except Exception:
         print("Cannot instantiate Entry, data not valid")
         return False
-    return execute_post("insert into entries values({}, '{}', '{}');".format(date.today(), entry.get_diagnosis(), entry.get_description()))
+    return execute_post("insert into mtp.entries values({}, '{}', '{}');".format(date.today(), entry.get_diagnosis(), entry.get_description()))

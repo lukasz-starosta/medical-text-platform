@@ -3,7 +3,7 @@ from flask.json import jsonify
 from flask_cors import CORS
 import jwt
 import datetime
-from services.database_service import setup_db
+from services.database_service import setup_db, execute_post
 from controllers.entry_controller import create_entry
 from controllers.search_controller import search
 from controllers.login_controller import loginAndGenerateToken

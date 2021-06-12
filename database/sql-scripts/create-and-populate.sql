@@ -11,7 +11,7 @@ CREATE TABLE entries (
     entryID INTEGER NOT NULL AUTO_INCREMENT, 
     entryDate DATE NOT NULL, 
     descriptionShort VARCHAR(500), 
-    descriptionLong VARCHAR(50000),
+    descriptionLong VARCHAR(10000),
     PRIMARY KEY (entryID)
 )   CHARSET=utf8;
 

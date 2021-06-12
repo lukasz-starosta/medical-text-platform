@@ -6,6 +6,7 @@ flask_cors
 itsdangerous
 jinja2
 markupsafe
+pika
 pip
 pyyaml
 setuptools

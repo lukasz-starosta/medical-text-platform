@@ -3,17 +3,22 @@ import { useRouter } from 'next/router'
 import { DASHBOARD_PATH } from '../../constants/app_paths'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import styles from './LoginForm.module.css'
-import { PROXY_LOGIN_PATH } from '../../constants/api_paths'
-import { ILoginForm } from '../../pages/api/login'
+import { API_LOGIN_PATH } from '../../constants/api_paths'
+
+interface ILoginForm {
+  username: string
+  password: string
+}
 
 const LoginForm = () => {
   const router = useRouter()
 
   const onFinish = async (values: ILoginForm) => {
-    const response = await (
-      await fetch(PROXY_LOGIN_PATH, { method: 'POST', body: JSON.stringify(values) })
-    ).json()
-    console.log('Success:', response)
+    // TODO: implement login
+    // const response = await (
+    //   await fetch(API_LOGIN_PATH, { method: 'POST', body: JSON.stringify(values) })
+    // ).json()
+    // console.log('Success:', response)
     router.push(DASHBOARD_PATH)
   }
 

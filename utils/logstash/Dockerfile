@@ -1,1 +1,6 @@
-FROM logstash
+FROM logstash:7.13.1
+
+EXPOSE 5044
+EXPOSE 5000/tcp
+EXPOSE 5000/udp
+EXPOSE 9600

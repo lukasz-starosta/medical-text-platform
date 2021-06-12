@@ -1,1 +1,4 @@
-FROM elasticsearch
+FROM elasticsearch:7.13.1
+
+EXPOSE 9200
+EXPOSE 9300

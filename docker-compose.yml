@@ -27,7 +27,7 @@ services:
         container_name: frontend
         build: ./frontend
         ports:
-            - 5000:3000
+            - 80:3000
         depends_on:
             - backend
         networks:
@@ -112,9 +112,10 @@ configs:
     kibana_config:
         file: ./utils/kibana/config/kibana.yml
 
+
 networks:
     mtp:
-        driver: overlay
+      name: mtp
 
 volumes:
     elasticsearch:

@@ -1,11 +1,12 @@
 from services.database_service import execute_post, execute_get
+from services.repository_service import select_from_users, update_users
 
 
 def fetch_user_info(request):
-    id = request[0]
-    return execute_get("select * from users where userID = {};".format(id))
+    id = request["userID"]
+    return execute_get(select_from_users(id))
 
 def change_password(request):
-    id = request[0]
-    new_password = request[1]
-    return execute_post("update users set password = '{}' where userID = {};".format(new_password, id))
+    id = request["userID"]
+    new_password = request["password"]
+    return execute_post(update_users(id, new_password))

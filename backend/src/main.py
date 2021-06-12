@@ -9,6 +9,7 @@ from controllers.search_controller import search
 from controllers.login_controller import loginAndGenerateToken
 from controllers.account_controller import fetch_user_info, change_password
 
+
 app = Flask(__name__)
 CORS(app)
 setup_db(app)
@@ -46,7 +47,9 @@ def user_info_endpoint():
 
 @app.route('/change-password', methods=['POST'])
 def change_password_endpoint():
-    return change_password(request.json)
+    if change_password(request.json):
+        return jsonify(message_ok)
+    else: abort(406)
 
 ############### ENTRY ###############
 @app.route('/create', methods=['POST'])

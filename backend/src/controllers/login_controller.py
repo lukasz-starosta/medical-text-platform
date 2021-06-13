@@ -1,50 +1,38 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask import jsonify, abort, make_response
+from services.login_service import hash_password, verify_password, generate_token, check_token
+from services.database_service import execute_post, execute_get
+from services.repository_service import insert_into_users, find_users_by_login
+from data.user import User
 import jwt
 import datetime
 
-def encodeAuthToken(user_id, groups=[]):
+
+def check(request):
+    return check_token(request)
+
+
+def logout(token):
+    pass
+
+
+def register_user(data):
     try:
-        admin = True if 'admin' in groups else False
+        user = User(data["login"], hash_password(data["password"]))
+    except:
+        abort(make_response(jsonify(message="Cannot instantiate User"), 406))
+    execute_post(insert_into_users(user.get_login(), user.get_password()))
+    return generate_token(user.get_login())
 
-        payload = {
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=60),
-            'iat': datetime.datetime.utcnow(),
-            'sub': user_id,
-            'admin': admin
-        }
-        token = jwt.encode(payload, 'super-secret-key', algorithm='HS256')
-        return token
-    except Exception as e:
-        print(e)
-        return e
-    
-def loginAndGenerateToken():
-    valid_user_1 = {'username': "test_user_1", 'password': 'Happy123'}
-    valid_user_2 = {'username': 'test_admin', 'password': 'LessHappy123'}
 
-    req_json = request.get_json()
-    print("Data",request.data)
-    print("Json", request.json)
-    username = req_json['username']
-    print(username)
-    password = req_json['password']
-    print(password)
-
-    try:
-        if username == valid_user_1['username'] and password == valid_user_1['password']:
-            token = encodeAuthToken(1)
-
-        if username == valid_user_2['username'] and password == valid_user_2['password']:
-            token = encodeAuthToken(2, ['admin'])
-
-        print(token)
-        return jsonify(result = {
-            'status': 'success',
-            'auth_token': token
-        })
-    except Exception as e:
-        return jsonify({
-            'status': 'Failure',
-            'error': e
-        })
+def login(request):
+    auth = request.authorization
+    if not auth or not auth.username or not auth.password:
+        abort(make_response(jsonify(message="Authorization data not complete"), 401))
+    user_data = execute_get(find_users_by_login(auth.username))
+    if not user_data.data:
+        abort(make_response(jsonify(message="No such user"), 401))
+    user_data_json = user_data.json[0]
+    user = User(user_data_json[1], password = user_data_json[2])
+    if verify_password(user.get_password(), auth.password):
+        return generate_token(user.get_login())
+    abort(make_response(jsonify(message="Wrong password"), 401))

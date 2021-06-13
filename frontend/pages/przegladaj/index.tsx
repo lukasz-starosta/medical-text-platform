@@ -6,15 +6,16 @@ import axios from 'axios'
 import { Space } from 'antd'
 import { useState } from 'react'
 import { EntryTable } from '../../components/EntryTable/EntryTable'
+import { Entry } from '../../shared/types/entry'
 
 const { Search } = Input
 const Browser = () => {
-  const [data, setData] = useState<any>([])
+  const [data, setData] = useState<Entry[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const onSearch = async (value: string) => {
     setLoading(true)
     const response = await axios.get(API_SEARCH_PATH, { params: { query: value } })
-    setData(response.data)
+    setData(response?.data)
     setLoading(false)
   }
 

@@ -36,6 +36,34 @@ services:
             - /app/node_modules
             - /app/.next
 
+    e2e:
+        image: cypress
+        build: ./e2e
+        container_name: cypress
+        depends_on:
+            - frontend
+        # note: inside e2e container, the network allows accessing
+        # "frontend" host under name "frontend"
+        # so "curl http://frontend" would return whatever the frontendserver
+        # in the "frontend" container is cooking
+        # see https://docs.docker.com/compose/networking/
+        environment:
+            - CYPRESS_baseUrl=http://frontend:3000
+        command: npx cypress run
+        # mount the host directory e2e/cypress and the file e2e/cypress.json as
+        # volumes within the container
+        # this means that:
+        #  1. anything that Cypress writes to these folders (e.g., screenshots,
+        #     videos) appears also on the Docker host's filesystem
+        #  2. any change that the developer applies to Cypress files on the host
+        #     machine immediately takes effect within the e2e container (no docker
+        #     rebuild required).
+        networks:
+            - mtp
+        volumes:
+            - ./e2e/cypress:/app/cypress
+            - ./e2e/cypress.json:/app/cypress.json
+
     rabbitmq:
         container_name: rabbitmq
         build: ./utils/rabbitmq

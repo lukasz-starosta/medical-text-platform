@@ -1,5 +1,4 @@
-version: "3.2"
-
+version: "3.7"
 services:
 
     database:
@@ -35,6 +34,10 @@ services:
         networks:
             mtp:
                 ipv4_address: 10.5.0.4
+        volumes:
+            - ./frontend:/app
+            - /app/node_modules
+            - /app/.next
 
     rabbitmq:
         container_name: rabbitmq

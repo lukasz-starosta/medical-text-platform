@@ -31,3 +31,12 @@ def execute_get(query):
         raise Exception
     else:
         return jsonify(result)
+
+def execute_get_single(query):
+    cur = mysql.connection.cursor(dictionary=True)
+    cur.execute(query)
+    result = cur.fetchone()
+    if result is None:
+        raise Exception
+    else:
+        return jsonify(result)

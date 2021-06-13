@@ -4,7 +4,7 @@ from flask_cors import CORS
 import jwt
 import datetime
 from services.database_service import setup_db, execute_post
-from controllers.entry_controller import create_entry
+from controllers.entry_controller import create_entry, get_entry
 from controllers.search_controller import search
 from controllers.login_controller import loginAndGenerateToken
 from controllers.account_controller import fetch_user_info, change_password
@@ -52,8 +52,12 @@ def change_password_endpoint():
     else: abort(406)
 
 ############### ENTRY ###############
-@app.route('/create', methods=['POST'])
-def create_endpoint():
+@app.route('/entry', methods=['POST'])
+def create_entry_endpoint():
     if create_entry(request.json):
         return jsonify(message_ok)
     else: abort(406)
+
+@app.route('/entry', methods=['GET'])
+def get_entry_endpoint():
+    return get_entry(request.args.get('postId', type=str))

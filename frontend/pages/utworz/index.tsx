@@ -2,13 +2,13 @@ import { Layout } from '../../components/Layout/Layout'
 import { Typography, Form, Input, Button } from 'antd'
 import styles from './upload.module.css'
 import axios from 'axios'
-import { API_CREATE_ENTRY_PATH } from '../../constants/api_paths'
+import { API_ENTRY_PATH } from '../../constants/api_paths'
 import { toast } from 'react-toastify'
 import { EntryForm } from '../../shared/types/entry'
 
 const Upload = () => {
   const onFinish = async (values: EntryForm) => {
-    const response = await axios.post(API_CREATE_ENTRY_PATH, values)
+    const response = await axios.post(API_ENTRY_PATH, values)
     if (response) {
       toast('Dodano wpis!', { type: 'success' })
     }

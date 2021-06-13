@@ -15,7 +15,6 @@ const Navbar = () => {
   const router = useRouter()
 
   const handleLogout = async () => {
-    await fetch(API_LOGOUT_PATH, {method: 'POST'})
     router.push(HOME_PATH)
   }
 

@@ -24,7 +24,7 @@ def execute_post(query):
     return True
 
 def execute_get(query):
-    cur = mysql.connection.cursor()
+    cur = mysql.connection.cursor(dictionary=True)
     cur.execute(query)
     result = cur.fetchall()
     if result is None:

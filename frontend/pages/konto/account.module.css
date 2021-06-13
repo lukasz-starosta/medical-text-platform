@@ -1,1 +1,6 @@
-
+.profilePicture {
+  border-radius: 100%;
+}
+.basicInfoContainer {
+  padding: 30px;
+}

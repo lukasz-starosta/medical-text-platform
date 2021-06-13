@@ -5,7 +5,7 @@ from datetime import date
 
 def create_entry(content):
     try:
-        entry = Entry(date.now(), content['descriptionShort'], content['descriptionLong'])
+        entry = Entry(date.today(), content['descriptionShort'], content['descriptionLong'])
     except Exception:
         print("Cannot instantiate Entry, data not valid")
         return False

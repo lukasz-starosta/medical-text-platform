@@ -8,6 +8,7 @@ from controllers.entry_controller import create_entry
 from controllers.search_controller import search
 from controllers.login_controller import loginAndGenerateToken
 from controllers.account_controller import fetch_user_info, change_password
+from logs.emit_log import emit_log
 
 
 app = Flask(__name__)
@@ -38,6 +39,7 @@ def logout_endpoint():
 @app.route('/search', methods=['GET'])
 def browse_endpoint():
     content = request.args.get('query', type=str)
+    emit_log(content)
     return search(content)
 
 ############### ACCOUNT ###############

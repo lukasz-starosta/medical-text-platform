@@ -8,7 +8,8 @@ services:
         ports:
             - 3306:3306
         networks:
-            - mtp
+            mtp:
+                ipv4_address: 10.5.0.2
 
     backend:
         container_name: backend
@@ -18,10 +19,11 @@ services:
         ports:
             - 5001:8080
             - 5678:5678
+        networks:
+            mtp:
+                ipv4_address: 10.5.0.3
         depends_on:
             - database
-        networks:
-            - mtp
 
     frontend:
         container_name: frontend
@@ -31,7 +33,8 @@ services:
         depends_on:
             - backend
         networks:
-            - mtp
+            mtp:
+                ipv4_address: 10.5.0.4
 
     rabbitmq:
         container_name: rabbitmq
@@ -40,83 +43,90 @@ services:
         ports:
             - 5672:5672
         networks:
-            - mtp
+            mtp:
+                ipv4_address: 10.5.0.5
 
-    elasticsearch:
-        container_name: elasticsearch
-        build: ./utils/elasticsearch
-        volumes:
-            - type: bind
-              source: ./utils/elasticsearch/config/elasticsearch.yml
-              target: /usr/share/elasticsearch/config/elasticsearch.yml
-              read_only: true
-            - type: volume
-              source: elasticsearch
-              target: /usr/share/elasticsearch/data
-        ports:
-            - "9200:9200"
-            - "9300:9300"
-        environment:
-            ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-            ELASTIC_PASSWORD: elastic
-            discovery.type: single-node
-        networks:
-            - mtp
+#     elasticsearch:
+#         container_name: elasticsearch
+#         build: ./utils/elasticsearch
+#         volumes:
+#             - type: bind
+#               source: ./utils/elasticsearch/config/elasticsearch.yml
+#               target: /usr/share/elasticsearch/config/elasticsearch.yml
+#               read_only: true
+#             - type: volume
+#               source: elasticsearch
+#               target: /usr/share/elasticsearch/data
+#         ports:
+#             - "9200:9200"
+#             - "9300:9300"
+#         environment:
+#             ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+#             ELASTIC_PASSWORD: elastic
+#             discovery.type: single-node
+#         networks:
+#             mtp:
+#                 ipv4_address: 10.5.0.6
     
-    logstash:
-        container_name: logstash
-        build: ./utils/logstash
-        volumes:
-            - type: bind
-              source: ./utils/logstash/config/logstash.yml
-              target: /usr/share/logstash/config/logstash.yml
-              read_only: true
-            - type: bind
-              source: ./utils/logstash/pipeline
-              target: /usr/share/logstash/pipeline
-              read_only: true
-        ports:
-            - "5044:5044"
-            - "5000:5000/tcp"
-            - "5000:5000/udp"
-            - "9600:9600"
-        environment:
-            LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-        networks:
-            - mtp
-        depends_on:
-            - elasticsearch
+#     logstash:
+#         container_name: logstash
+#         build: ./utils/logstash
+#         volumes:
+#             - type: bind
+#               source: ./utils/logstash/config/logstash.yml
+#               target: /usr/share/logstash/config/logstash.yml
+#               read_only: true
+#             - type: bind
+#               source: ./utils/logstash/pipeline
+#               target: /usr/share/logstash/pipeline
+#               read_only: true
+#         ports:
+#             - "5044:5044"
+#             - "5000:5000/tcp"
+#             - "5000:5000/udp"
+#             - "9600:9600"
+#         environment:
+#             LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+#         networks:
+#             mtp:
+#                 ipv4_address: 10.5.0.7
+#         depends_on:
+#             - elasticsearch
     
-    kibana:
-        container_name: kibana
-        build: ./utils/kibana/
-        volumes:
-            - type: bind
-              source: ./utils/kibana/config/kibana.yml
-              target: /usr/share/kibana/config/kibana.yml
-              read_only: true
-        ports:
-            - "5601:5601"
-        networks:
-            - mtp
-        depends_on:
-            - elasticsearch
+#     kibana:
+#         container_name: kibana
+#         build: ./utils/kibana/
+#         volumes:
+#             - type: bind
+#               source: ./utils/kibana/config/kibana.yml
+#               target: /usr/share/kibana/config/kibana.yml
+#               read_only: true
+#         ports:
+#             - "5601:5601"
+#         networks:
+#             mtp:
+#                 ipv4_address: 10.5.0.8
+#         depends_on:
+#             - elasticsearch
 
-configs:
-    elastic_config:
-        file: ./utils/elasticsearch/config/elasticsearch.yml
-    logstash_config:
-        file: ./utils/logstash/config/logstash.yml
-    logstash_pipeline:
-        file: ./utils/logstash/pipeline/logstash.conf
-    kibana_config:
-        file: ./utils/kibana/config/kibana.yml
+# configs:
+#     elastic_config:
+#         file: ./utils/elasticsearch/config/elasticsearch.yml
+#     logstash_config:
+#         file: ./utils/logstash/config/logstash.yml
+#     logstash_pipeline:
+#         file: ./utils/logstash/pipeline/logstash.conf
+#     kibana_config:
+#         file: ./utils/kibana/config/kibana.yml
 
 
 networks:
-    mtp:
-      name: mtp
+  mtp:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1
 
 volumes:
     elasticsearch:
-        

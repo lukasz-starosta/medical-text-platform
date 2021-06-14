@@ -29,7 +29,7 @@ def login(request):
     if not auth or not auth["login"] or not auth["password"]:
         abort(make_response(jsonify(message="Authorization data not complete"), 401))
     user_data = execute_get(find_users_by_login(auth["login"]))
-    if not user_data.data:
+    if not user_data.data or user_data.json == []:
         abort(make_response(jsonify(message="No such user"), 401))
     user_data_json = user_data.json[0]
     user = User(user_data_json["login"], password = user_data_json["password"])

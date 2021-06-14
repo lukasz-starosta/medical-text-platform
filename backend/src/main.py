@@ -67,6 +67,8 @@ def create_endpoint(current_user):
     create_entry(request.json)
     return jsonify(message = "OK")
 
+
 @app.route('/entry', methods=['GET'])
+@token_required
 def get_entry_endpoint():
     return get_entry(request.args.get('postId', type=str))

@@ -42,6 +42,6 @@ def token_required(f):
 
 
 def generate_token(login):
-    token = jwt.encode({"login": login, "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, get_secret_key())
+    token = jwt.encode({"login": login, "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=24)}, get_secret_key())
     return jsonify({"token": token})
 

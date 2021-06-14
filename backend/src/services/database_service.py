@@ -1,12 +1,12 @@
 import yaml
-from flask import jsonify
+from flask import jsonify, abort, make_response
 from flask_mysql_connector import MySQL
 
 mysql = None
 
 def setup_db(app):
     global mysql
-    db = yaml.load(open('src/services/db_config.yaml'), Loader=yaml.FullLoader)
+    db = yaml.load(open('src/config/db_config.yaml'), Loader=yaml.FullLoader)
     app.config['MYSQL_HOST'] = db['mysql_host']
     app.config['MYSQL_PORT'] = db['mysql_port']
     app.config['MYSQL_USER'] = db['mysql_user']
@@ -17,26 +17,31 @@ def setup_db(app):
     return app
 
 def execute_post(query):
-    cur = mysql.connection.cursor()
-    cur.execute(query)
-    mysql.connection.commit()
-    cur.close()
-    return True
+    try:
+        cur = mysql.connection.cursor(dictionary=True)
+        cur.execute(query)
+        mysql.connection.commit()
+        cur.close()
+        return True
+    except Exception as e:
+        dupa = str(e)
+        abort(make_response(jsonify(message="Could not post data to the database"), 409))
 
 def execute_get(query):
-    cur = mysql.connection.cursor(dictionary=True)
-    cur.execute(query)
-    result = cur.fetchall()
-    if result is None:
-        raise Exception
-    else:
+    try:
+        cur = mysql.connection.cursor(dictionary=True)
+        cur.execute(query)
+        result = cur.fetchall()
         return jsonify(result)
+    except:
+        abort(make_response(jsonify(message="Could not retrieve data from database"), 409))
 
+        
 def execute_get_single(query):
-    cur = mysql.connection.cursor(dictionary=True)
-    cur.execute(query)
-    result = cur.fetchone()
-    if result is None:
-        raise Exception
-    else:
+    try:
+        cur = mysql.connection.cursor(dictionary=True)
+        cur.execute(query)
+        result = cur.fetchone()
         return jsonify(result)
+    except:
+        abort(make_response(jsonify(message="Could not retrieve data from database"), 409))

@@ -1,63 +1,74 @@
-from flask import Flask, request, abort
-from flask.json import jsonify
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-import jwt
-import datetime
-from services.database_service import setup_db, execute_post
+from services.database_service import setup_db
+from services.auth_config_service import setup_auth
+from services.login_service import token_required
 from controllers.entry_controller import create_entry, get_entry
 from controllers.search_controller import search
-from controllers.login_controller import loginAndGenerateToken
+from controllers.login_controller import check, register_user, login, logout
 from controllers.account_controller import fetch_user_info, change_password
 
 
 app = Flask(__name__)
 CORS(app)
 setup_db(app)
+setup_auth(app)
 
-message_ok = {'message': 'OK'}
-message_todo = {'message': 'TODO'}
 
 ############### AUTH ###############
 @app.route('/login', methods=['POST'])
 def login_endpoint():
-    return loginAndGenerateToken()
+    return login(request)
+
 
 @app.route('/register', methods=['POST'])
 def register_endpoint():
-    return jsonify(message_todo)
+    return register_user(request.json)
+
 
 @app.route('/check', methods=['POST'])
-def check_endpoint():
-    return jsonify(message_todo)
+@token_required
+def check_endpoint(current_user):
+    check(request)
+    return jsonify(message = "OK")
+
 
 @app.route('/logout', methods=['POST'])
-def logout_endpoint():
-    return jsonify(message_todo)
+@token_required
+def logout_endpoint(current_user):
+    return jsonify(message = "Not ready")
+
 
 ############### BROWSER ###############
 @app.route('/search', methods=['GET'])
-def browse_endpoint():
-    content = request.args.get('query', type=str)
-    return search(content)
+@token_required
+def browse_endpoint(current_user):
+    return search(request.args.get('query'))
 
-############### ACCOUNT ###############
+
+# ############### ACCOUNT ###############
 @app.route('/user-info', methods=['GET'])
-def user_info_endpoint():
-    return fetch_user_info(request.json)
+@token_required
+def user_info_endpoint(current_user):
+    return fetch_user_info(current_user)
+
 
 @app.route('/change-password', methods=['POST'])
-def change_password_endpoint():
-    if change_password(request.json):
-        return jsonify(message_ok)
-    else: abort(406)
+@token_required
+def change_password_endpoint(current_user):
+    change_password(current_user, request.json)
+    return jsonify(message = "OK")
 
-############### ENTRY ###############
+
+# ############### ENTRY ###############
 @app.route('/entry', methods=['POST'])
-def create_entry_endpoint():
-    if create_entry(request.json):
-        return jsonify(message_ok)
-    else: abort(406)
+@token_required
+def create_endpoint(current_user):
+    create_entry(request.json)
+    return jsonify(message = "OK")
+
 
 @app.route('/entry', methods=['GET'])
+@token_required
 def get_entry_endpoint():
     return get_entry(request.args.get('postId', type=str))

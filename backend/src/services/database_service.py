@@ -16,6 +16,7 @@ def setup_db(app):
     mysql = MySQL(app)
     return app
 
+
 def execute_post(query):
     try:
         cur = mysql.connection.cursor(dictionary=True)
@@ -26,6 +27,7 @@ def execute_post(query):
     except Exception as e:
         dupa = str(e)
         abort(make_response(jsonify(message="Could not post data to the database"), 409))
+
 
 def execute_get(query):
     try:

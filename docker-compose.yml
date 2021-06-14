@@ -13,7 +13,7 @@ services:
         container_name: backend
         build: 
             context: ./backend
-            target: prod
+            target: debug
         ports:
             - 5001:8080
             - 5678:5678

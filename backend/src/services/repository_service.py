@@ -5,6 +5,8 @@ def insert_into_entries(date, desc_short, desc_long):
 def find_entries_by_description_short(content):
     return "select * from entries where descriptionShort like '%{}%';".format(content)
 
+def find_entries_by_id(id):
+    return "select * from entries where entryID = {};".format(id)
   
 ########## USERS ##########
 def insert_into_users(login, password):

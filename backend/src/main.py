@@ -52,13 +52,13 @@ def browse_endpoint(current_user):
 @app.route('/user-info', methods=['GET'])
 @token_required
 def user_info_endpoint(current_user):
-    return fetch_user_info(request.json)
+    return fetch_user_info(current_user)
 
 
 @app.route('/change-password', methods=['POST'])
 @token_required
 def change_password_endpoint(current_user):
-    change_password(request.json)
+    change_password(current_user, request.json)
     return jsonify(message = "OK")
 
 

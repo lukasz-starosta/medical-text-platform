@@ -15,5 +15,5 @@ def find_users_by_id(id):
 def find_users_by_login(login):
     return "select * from users where login like '{}';".format(login)
 
-def update_users(id, new_password):
-    return "update users set password = '{}' where userID = {};".format(new_password, id)
+def update_users(login, new_password):
+    return "update users set password = '{}' where login like '{}';".format(new_password, login)

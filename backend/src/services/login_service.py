@@ -28,7 +28,7 @@ def check_token(request):
         data = jwt.decode(token, get_secret_key(), algorithms="HS256")
         current_user_data = execute_get(find_users_by_login(data["login"]))
         current_user_data_json = current_user_data.json[0]
-        current_user = User(current_user_data_json[1], current_user_data_json[2])
+        current_user = User(current_user_data_json["login"], current_user_data_json["password"])
     except:
         abort(make_response(jsonify(message="Token is invalid"), 401))
     return current_user
@@ -37,7 +37,7 @@ def check_token(request):
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        return f(check_token, *args, **kwargs)
+        return f(check_token(request), *args, **kwargs)
     return decorated
 
 

@@ -5,6 +5,7 @@ def insert_into_entries(date, desc_short, desc_long):
 def find_entries_by_description_short(content):
     return "select * from entries where descriptionShort like '%{}%';".format(content)
 
+  
 ########## USERS ##########
 def insert_into_users(login, password):
     return "insert into users(login, password) values('{}', '{}');".format(login, password)
@@ -17,3 +18,4 @@ def find_users_by_login(login):
 
 def update_users(login, new_password):
     return "update users set password = '{}' where login like '{}';".format(new_password, login)
+  

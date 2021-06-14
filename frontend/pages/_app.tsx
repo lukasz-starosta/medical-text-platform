@@ -2,16 +2,12 @@ import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import '../styles/globals.css'
 import axios from 'axios'
-import {
-  interceptErrorResponse,
-  interceptOKResponse,
-  interceptRequest,
-} from '../shared/interceptors'
+import { interceptError, interceptOKResponse, interceptRequest } from '../shared/interceptors'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-axios.interceptors.request.use(interceptRequest)
-axios.interceptors.response.use(interceptOKResponse, interceptErrorResponse)
+axios.interceptors.request.use(interceptRequest, interceptError)
+axios.interceptors.response.use(interceptOKResponse, interceptError)
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

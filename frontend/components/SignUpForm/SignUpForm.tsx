@@ -1,25 +1,30 @@
 import { Form, Input, Button, Checkbox, Card } from 'antd'
 import { useRouter } from 'next/router'
-import { DASHBOARD_PATH, SIGNUP_PATH } from '../../constants/app_paths'
+import { DASHBOARD_PATH } from '../../constants/app_paths'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
-import styles from './LoginForm.module.css'
-import { API_LOGIN_PATH } from '../../constants/api_paths'
+import styles from './SignUpForm.module.css'
+import { API_LOGIN_PATH, API_REGISTER_PATH } from '../../constants/api_paths'
 import { TOKEN_KEY } from '../../constants/token'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import Link from 'next/link'
 
-interface ILoginForm {
+interface ISignUpForm {
   login: string
   password: string
+  confirmPassword: string
 }
 
-const LoginForm = () => {
+const SignUpForm = () => {
   const router = useRouter()
 
-  const onFinish = async (values: ILoginForm) => {
+  const onFinish = async (values: ISignUpForm) => {
     try {
-      const response = await axios.post(API_LOGIN_PATH, { ...values })
+      if (values.password !== values.confirmPassword) throw new Error()
+
+      const response = await axios.post(API_REGISTER_PATH, {
+        login: values.login,
+        password: values.password,
+      })
       localStorage.setItem(TOKEN_KEY, response.data.token)
       router.push(DASHBOARD_PATH)
     } catch {
@@ -28,8 +33,8 @@ const LoginForm = () => {
   }
 
   return (
-    <Card title="Zaloguj się">
-      <Form<ILoginForm> name="login-form" initialValues={{ remember: true }} onFinish={onFinish}>
+    <Card title="Zarejestruj się">
+      <Form<ISignUpForm> name="signup-form" initialValues={{ remember: true }} onFinish={onFinish}>
         <Form.Item name="login" rules={[{ required: true, message: 'Wpisz nazwę użytkownika' }]}>
           <Input
             prefix={<UserOutlined className={styles.icon} />}
@@ -43,13 +48,22 @@ const LoginForm = () => {
             placeholder="Hasło"
           />
         </Form.Item>
+        <Form.Item
+          name="confirmPassword"
+          rules={[{ required: true, message: 'Wpisz poprawne hasło' }]}
+        >
+          <Input
+            prefix={<LockOutlined className={styles.icon} />}
+            type="password"
+            placeholder="Powtórz hasło"
+          />
+        </Form.Item>
 
         <Form.Item>
           <div className={styles.buttons}>
             <Button type="primary" htmlType="submit">
-              Zaloguj
+              Zarejestruj się
             </Button>
-            lub <Link href={SIGNUP_PATH}>Zarejestruj</Link>
           </div>
         </Form.Item>
       </Form>
@@ -57,4 +71,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default SignUpForm

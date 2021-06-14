@@ -26,7 +26,7 @@ def register_endpoint():
     return register_user(request.json)
 
 
-@app.route('/check', methods=['POST'])
+@app.route('/check', methods=['GET'])
 @token_required
 def check_endpoint(current_user):
     check(request)

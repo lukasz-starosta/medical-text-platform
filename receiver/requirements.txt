@@ -1,0 +1,6 @@
+asyncio
+flask
+flask_cors
+pika
+pip
+wheel

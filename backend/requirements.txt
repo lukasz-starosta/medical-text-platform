@@ -1,3 +1,4 @@
+asyncio
 certifi
 click
 flask
@@ -8,6 +9,7 @@ jinja2
 markupsafe
 pika
 pip
+python-logstash-async
 pyyaml
 setuptools
 vc

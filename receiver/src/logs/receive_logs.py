@@ -2,6 +2,11 @@ import pika
 import asyncio
 
 async def receive_logs():
+    
+    print("Waiting for RabbitMQ to be up...")
+    await asyncio.sleep(20)
+    print("Waiting done!")
+
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='10.5.0.5'))
     channel = connection.channel()
 
@@ -12,10 +17,14 @@ async def receive_logs():
 
     channel.queue_bind(exchange='logs', queue=queue_name)
 
-    print(' [*] Waiting for logs. To exit press CTRL+C')
+    print(' [*] Waiting for logs...')
 
-    async def callback(ch, method, properties, body):
-        print(" [x] %r" % body)
+    def callback(ch, method, properties, body):
+        print("\n \n @@@@@@@@@@@@@@@@@@@@@ \n MESSAGE RECEIVED! \n @@@@@@@@@@@@@@@@@@@@@\n")
+        print("CHANNEL: " + ch + "\n")
+        print("METHOD: " + method + "\n")
+        print("PROPERTIES: " + properties + "\n")
+        print("BODY: " + body + "\n\n")
 
     channel.basic_consume(queue=queue_name, on_message_callback=callback, auto_ack=True)
 

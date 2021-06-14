@@ -35,3 +35,13 @@ def execute_get(query):
         return jsonify(result)
     except:
         abort(make_response(jsonify(message="Could not retrieve data from database"), 409))
+
+        
+def execute_get_single(query):
+    try:
+        cur = mysql.connection.cursor(dictionary=True)
+        cur.execute(query)
+        result = cur.fetchone()
+        return jsonify(result)
+    except:
+        abort(make_response(jsonify(message="Could not retrieve data from database"), 409))

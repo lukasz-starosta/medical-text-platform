@@ -1,11 +1,9 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-# import jwt
-# import datetime
 from services.database_service import setup_db
 from services.auth_config_service import setup_auth
 from services.login_service import token_required
-from controllers.entry_controller import create_entry
+from controllers.entry_controller import create_entry, get_entry
 from controllers.search_controller import search
 from controllers.login_controller import check, register_user, login, logout
 from controllers.account_controller import fetch_user_info, change_password
@@ -63,8 +61,12 @@ def change_password_endpoint(current_user):
 
 
 # ############### ENTRY ###############
-@app.route('/create', methods=['POST'])
+@app.route('/entry', methods=['POST'])
 @token_required
 def create_endpoint(current_user):
     create_entry(request.json)
     return jsonify(message = "OK")
+
+@app.route('/entry', methods=['GET'])
+def get_entry_endpoint():
+    return get_entry(request.args.get('postId', type=str))

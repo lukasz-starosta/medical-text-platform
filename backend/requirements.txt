@@ -16,4 +16,4 @@ vc
 werkzeug
 wheel
 wincertstore
-jwt
+pyjwt

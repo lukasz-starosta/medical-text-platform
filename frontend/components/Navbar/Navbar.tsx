@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { Button, Grid, Menu } from 'antd'
+import { Button } from 'antd'
 import styles from './Navbar.module.css'
 import {
   DASHBOARD_PATH,
@@ -9,13 +9,13 @@ import {
   HOME_PATH,
   PRIVACY_PATH,
 } from '../../constants/app_paths'
-import { API_LOGOUT_PATH } from '../../constants/api_paths'
+import { TOKEN_KEY } from '../../constants/token'
 
 const Navbar = () => {
   const router = useRouter()
 
   const handleLogout = async () => {
-    await fetch(API_LOGOUT_PATH, {method: 'POST'})
+    localStorage.removeItem(TOKEN_KEY)
     router.push(HOME_PATH)
   }
 

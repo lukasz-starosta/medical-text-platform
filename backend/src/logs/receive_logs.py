@@ -2,7 +2,7 @@ import pika
 import asyncio
 
 async def receive_logs():
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='10.5.0.5'))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='rabbitmq'))
     channel = connection.channel()
 
     channel.exchange_declare(exchange='logs', exchange_type='fanout')

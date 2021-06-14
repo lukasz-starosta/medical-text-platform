@@ -4,10 +4,10 @@ import asyncio
 async def receive_logs():
     
     print("Waiting for RabbitMQ to be up...")
-    await asyncio.sleep(20)
+    await asyncio.sleep(30)
     print("Waiting done!")
 
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='10.5.0.5'))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='rabbitmq'))
     channel = connection.channel()
 
     channel.exchange_declare(exchange='logs', exchange_type='fanout')

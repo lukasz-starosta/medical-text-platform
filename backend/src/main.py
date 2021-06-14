@@ -8,6 +8,9 @@ from controllers.search_controller import search
 from controllers.login_controller import check, register_user, login, logout
 from controllers.account_controller import fetch_user_info, change_password
 from logs.emit_log import emit_log
+import logging
+import sys
+from logstash_async.handler import AsynchronousLogstashHandler
 
 
 app = Flask(__name__)
@@ -15,6 +18,18 @@ CORS(app)
 setup_db(app)
 setup_auth(app)
 
+# host = 'logstash'
+# port = 5000
+
+# test_logger = logging.getLogger('python-logstash-logger')
+# test_logger = logging.getLogger('')
+# test_logger.setLevel(logging.INFO)
+# test_logger.addHandler(AsynchronousLogstashHandler(host, port, database_path='logstash_test.db'))
+
+# test_logger.error('python-logstash-async: test logstash error message.')
+# test_logger.info('python-logstash-async: test logstash info message.')
+# test_logger.warning('python-logstash-async: test logstash warning message.')
+# test_logger.debug('python-logstash-async: test logstash debug message.')
 
 ############### AUTH ###############
 @app.route('/login', methods=['POST'])
@@ -42,17 +57,11 @@ def logout_endpoint(current_user):
 
 ############### BROWSER ###############
 @app.route('/search', methods=['GET'])
-<<<<<<< HEAD
-def browse_endpoint():
-    content = request.args.get('query', type=str)
+# @token_required
+def browse_endpoint(current_user):
+    content = request.args.get('query')
     emit_log(content)
     return search(content)
-=======
-@token_required
-def browse_endpoint(current_user):
-    return search(request.args.get('query'))
-
->>>>>>> 5cf74a6a10aec7262cdd53fbc17164ec051fb410
 
 # ############### ACCOUNT ###############
 @app.route('/user-info', methods=['GET'])

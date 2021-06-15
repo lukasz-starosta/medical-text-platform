@@ -10,7 +10,7 @@
     "test:watch": "npx jest --watch"
   },
   "dependencies": {
-    "antd": "^4.16.2",
+    "antd": "^4.16.1",
     "axios": "^0.21.1",
     "next": "10.2.3",
     "react": "17.0.2",

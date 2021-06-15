@@ -7,6 +7,7 @@ import { Space } from 'antd'
 import { useState } from 'react'
 import { EntryTable } from '../../components/EntryTable/EntryTable'
 import { Entry } from '../../shared/types/entry'
+import withAuth from '../../components/withAuth/withAuth'
 
 const { Search } = Input
 const Browser = () => {
@@ -35,4 +36,4 @@ const Browser = () => {
   )
 }
 
-export default Browser
+export default withAuth(Browser)

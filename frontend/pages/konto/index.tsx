@@ -3,6 +3,7 @@ import { Row, Col, Typography } from 'antd'
 import Image from 'next/image'
 import { Layout } from '../../components/Layout/Layout'
 import ProfileBox from '../../components/ProfileBox/ProfileBox'
+import withAuth from '../../components/withAuth/withAuth'
 
 const Account = () => {
   return (
@@ -26,4 +27,4 @@ const Account = () => {
   )
 }
 
-export default Account
+export default withAuth(Account)

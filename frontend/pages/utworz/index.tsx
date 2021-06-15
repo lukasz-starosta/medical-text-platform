@@ -5,6 +5,7 @@ import axios from 'axios'
 import { API_ENTRY_PATH } from '../../constants/api_paths'
 import { toast } from 'react-toastify'
 import { EntryForm } from '../../shared/types/entry'
+import withAuth from '../../components/withAuth/withAuth'
 
 const Upload = () => {
   const onFinish = async (values: EntryForm) => {
@@ -34,4 +35,4 @@ const Upload = () => {
   )
 }
 
-export default Upload
+export default withAuth(Upload)

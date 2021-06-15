@@ -3,6 +3,7 @@ import styles from './dashboard.module.css'
 import SubscriptionInfo from '../../components/SubscriptionInfo/SubscriptionInfo'
 import News from '../../components/News/News'
 import { Layout } from '../../components/Layout/Layout'
+import withAuth from '../../components/withAuth/withAuth'
 
 const Dashboard = () => {
   return (
@@ -19,4 +20,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default withAuth(Dashboard)

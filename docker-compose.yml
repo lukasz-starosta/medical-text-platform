@@ -1,4 +1,4 @@
-version: "3.2"
+version: "3.7"
 
 services:
 
@@ -163,7 +163,8 @@ services:
 
 networks:
   mtp:
+    name: mtp
     driver: bridge
 
-volumes:
-    elasticsearch:
+# volumes:
+#     elasticsearch:

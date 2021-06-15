@@ -21,10 +21,10 @@ async def receive_logs():
 
     def callback(ch, method, properties, body):
         print("\n \n @@@@@@@@@@@@@@@@@@@@@ \n MESSAGE RECEIVED! \n @@@@@@@@@@@@@@@@@@@@@\n")
-        print("CHANNEL: " + ch + "\n")
-        print("METHOD: " + method + "\n")
-        print("PROPERTIES: " + properties + "\n")
-        print("BODY: " + body + "\n\n")
+        print("CHANNEL: " + str(ch) + "\n")
+        print("METHOD: " + str(method) + "\n")
+        print("PROPERTIES: " + str(properties) + "\n")
+        print("BODY: " + str(body) + "\n\n")
 
     channel.basic_consume(queue=queue_name, on_message_callback=callback, auto_ack=True)
 

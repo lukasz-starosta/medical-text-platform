@@ -77,18 +77,19 @@ services:
             - mtp
 
 
-    receiver:
-        container_name: receiver
-        build: 
-            context: ./receiver
-            target: prod
-        environment:
-            - PYTHONUNBUFFERED=1
-        networks:
-            - mtp
-        depends_on:
-            - database
-            - rabbitmq
+    # receiver:
+    #     container_name: receiver
+    #     build: 
+    #         context: ./receiver
+    #         target: prod
+    #     environment:
+    #         - PYTHONUNBUFFERED=1
+    #     networks:
+    #         - mtp
+    #     depends_on:
+    #         - database
+    #         - rabbitmq
+    #         - frontend
 
 #     elasticsearch:
 #         container_name: elasticsearch

@@ -31,13 +31,7 @@ def register_endpoint():
 def check_endpoint(current_user):
     check(request)
     return jsonify(message = "OK")
-
-
-@app.route('/logout', methods=['POST'])
-@token_required
-def logout_endpoint(current_user):
-    return jsonify(message = "Not ready")
-
+    
 
 ############### BROWSER ###############
 @app.route('/search', methods=['GET'])

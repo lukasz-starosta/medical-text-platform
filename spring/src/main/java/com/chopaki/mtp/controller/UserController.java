@@ -5,7 +5,10 @@ import com.chopaki.mtp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -13,13 +16,13 @@ public class UserController {
     UserService userService;
 
     @GetMapping(path = "user-info")
-    public User getUserInfo() {
-        return userService.getUserData();
+    public Optional<User> getUserInfo(@RequestBody User user) {
+        return userService.getUserData(user);
     }
 
     @PostMapping(path = "change-password")
-    public Boolean changePassword() {
-        return null;
+    public void changePassword(@RequestBody User user) {
+        userService.changePassword(user);
     }
 
     @PostMapping(path = "login")
@@ -33,7 +36,6 @@ public class UserController {
     }
 
     @GetMapping(path = "check")
-    public String validateToken() {
-        return null;
+    public void validateToken() {
     }
 }

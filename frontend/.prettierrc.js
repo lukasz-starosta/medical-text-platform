@@ -3,4 +3,5 @@ module.exports = {
   // override config here
   semi: false,
   bracketSpacing: true,
+  spaces: 2
 }

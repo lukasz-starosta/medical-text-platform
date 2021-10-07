@@ -13,16 +13,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Static Code Analysis
-        run: npm run lint --prefix frontend
-
-  test:
+  build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -33,10 +24,13 @@ jobs:
 
       - name: Install dependencies
         run: npm ci --prefix frontend
-      
+
+      - name: Static Code Analysis
+        run: npm run lint --prefix frontend
+
       - name: Run tests
         run: npm run test --prefix frontend
+    
 
-      # Runs a single command using the runners shell
       # - name: Build containers
         # run: docker-compose up --build

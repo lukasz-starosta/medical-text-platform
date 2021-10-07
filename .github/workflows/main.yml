@@ -25,6 +25,9 @@ jobs:
       - name: Checkout frontend
         run: cd frontend
 
+      - name: find pack
+        run: find package-lock.json
+
       - name: Install dependencies
         run: npm ci
       

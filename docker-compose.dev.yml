@@ -1,0 +1,3 @@
+# Add additional configuration for development here
+frontend:
+  target: development

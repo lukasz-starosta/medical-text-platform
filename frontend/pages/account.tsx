@@ -1,5 +1,5 @@
-import styles from './account.module.css'
-import layoutStyles from './dashboard.module.css'
+import styles from './konto/account.module.css'
+import layoutStyles from './tablica/dashboard.module.css'
 import { Layout, Row, Col } from 'antd'
 import { Content } from 'antd/lib/layout/layout'
 import Sider from 'antd/lib/layout/Sider'

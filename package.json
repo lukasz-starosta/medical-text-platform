@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d",
     "build": "docker-compose build",
     "test:frontend": "cd frontend && npx jest",
     "test:e2e": "docker-compose up --abort-on-container-exit --exit-code-from e2e"

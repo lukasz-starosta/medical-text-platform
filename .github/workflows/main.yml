@@ -22,17 +22,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Checkout frontend
-        run: cd frontend
-
-      - name: find pack
-        run: ls -a
-
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --prefix frontend
       
       - name: Run tests
-        run: npx jest
+        run: cd frontend && npx jest
 
       # - name: Run Static Code Analysis
       #   run: npm run lint --prefix frontend

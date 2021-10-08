@@ -23,5 +23,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Compose version
+        run: docker-compose -v
+
       - name: Lint, test and build the image
         run: docker-compose up frontend --build

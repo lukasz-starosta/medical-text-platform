@@ -25,8 +25,9 @@ services:
 
     frontend:
         container_name: frontend
-        build: ./frontend
-        target: production
+        build: 
+            context: ./frontend
+            target: production
         depends_on:
             - backend
         networks:

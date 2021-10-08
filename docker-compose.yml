@@ -28,8 +28,6 @@ services:
         build: 
             context: ./frontend
             target: production
-        depends_on:
-            - backend
         networks:
             - mtp
         ports:

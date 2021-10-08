@@ -24,4 +24,4 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Lint, test and build the image
-        run: docker-compose up frontend --build
+        run: docker-compose up --build frontend

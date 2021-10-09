@@ -4,7 +4,7 @@ FROM node:lts-alpine as base
 FROM base AS deps
 # make the 'app' folder the current working directory
 WORKDIR /app
-COPY package*.json .
+COPY package*.json ./
 RUN npm ci
 
 FROM base as production

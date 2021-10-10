@@ -8,19 +8,17 @@ DROP TABLE IF EXISTS entries;
 DROP TABLE IF EXISTS users;                 
 
 CREATE TABLE entries (
-    id INTEGER NOT NULL AUTO_INCREMENT, 
+    id INTEGER NOT NULL, 
     entryDate DATE, 
     descriptionShort VARCHAR(500), 
-    descriptionLong VARCHAR(10000),
-    PRIMARY KEY (id)
+    descriptionLong VARCHAR(10000)
 )   CHARSET=utf8;
 
 CREATE TABLE users (
-    id INTEGER NOT NULL AUTO_INCREMENT, 
-    login VARCHAR(50), 
+    id INTEGER NOT NULL, 
+    username VARCHAR(50), 
     password VARCHAR(200), 
-    email VARCHAR(50),
-    PRIMARY KEY (id)
+    email VARCHAR(50)
 )   CHARSET=utf8;
 
 INSERT INTO entries (id, entryDate, descriptionShort, descriptionLong)
@@ -35,10 +33,3 @@ VALUES  (1, '2021-06-10', 'Lorem ipsum dolor sit amet, consectetur adipiscing el
         (9, '2020-12-15', 'Nulla sit amet nisl tellus.', 'Phasellus est nisi, malesuada id quam et, facilisis tempor felis. Donec eu dictum mauris. Nulla vel nisl mattis, laoreet nisl ut, porta diam. Sed posuere elit sapien, ac luctus magna ultricies sit amet. Pellentesque semper, nibh sit amet cursus rhoncus, lacus mi feugiat metus, consequat auctor massa elit varius risus. Vivamus nisi nisi, consequat eget ultricies tristique, eleifend et arcu.'),
         (10, '2020-11-23', 'Duis quis turpis sit amet lorem pulvinar fermentum in id massa.', 'Morbi finibus lacinia diam nec feugiat. Sed sodales justo eu odio porttitor, nec placerat justo tincidunt. Sed et enim nisi. In dictum fringilla tellus, vel mattis odio auctor et. Sed pretium tellus sed risus facilisis hendrerit. Donec faucibus lorem massa, vel interdum velit faucibus ac. In id dictum enim. Sed vitae turpis ac urna accumsan lacinia. Aenean sit amet finibus odio. Etiam fermentum porta vehicula.');
 
-INSERT INTO users (id, login, password, email)
-VALUES  (1, 'aa', 'aa', 'aa@mtp.com'),
-        (2, 'js', 'js', 'js@mtp.com'),
-        (3, 'ms', 'ms', 'ms@mtp.com'),
-        (4, 'km', 'km', 'km@mtp.com'),
-        (5, 'ls', 'ls', 'ls@mtp.com'),
-        (6, 'sr', 'sr', 'sr@mtp.com');

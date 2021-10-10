@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+//@Repository
 public interface EntryRepository extends JpaRepository<Entry, Long> {
     Optional<List<Entry>> findByDescriptionShortContaining(String descriptionShort);
 }

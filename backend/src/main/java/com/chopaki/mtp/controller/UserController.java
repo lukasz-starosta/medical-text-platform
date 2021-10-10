@@ -4,6 +4,7 @@ import com.chopaki.mtp.model.User;
 import com.chopaki.mtp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,12 +37,12 @@ public class UserController {
     }
 
     @PostMapping(path = "register")
-    public ResponseEntity<String> register(@RequestBody User user) {
+    public ResponseEntity<?> register(@RequestBody User user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/register").toUriString());
-        return ResponseEntity.created(uri).body(userService.register(user));
-    }
-
-    @GetMapping(path = "check")
-    public void validateToken() {
+        if (userService.register(user)) {
+            return ResponseEntity.created(uri).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+        }
     }
 }

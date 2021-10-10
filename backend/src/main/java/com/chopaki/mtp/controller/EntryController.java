@@ -24,8 +24,8 @@ public class EntryController {
     }
 
     @GetMapping(path = "entry")
-    public ResponseEntity<Entry> getEntry(@RequestBody Entry entry) {
-        return ResponseEntity.ok().body(entryService.getEntry(entry));
+    public ResponseEntity<Entry> getEntry(@RequestParam Long entryId) {
+        return ResponseEntity.ok().body(entryService.getEntry(entryId));
     }
 
     @PostMapping(path = "entry")

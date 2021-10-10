@@ -46,10 +46,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         log.info("Changing password");
     }
 
-    public String register(User user) {
+    public Boolean register(User user) {
         log.info("Adding new user");
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return "dupa";
+        if (userRepository.findByUsername(user.getUsername()) == null) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 }

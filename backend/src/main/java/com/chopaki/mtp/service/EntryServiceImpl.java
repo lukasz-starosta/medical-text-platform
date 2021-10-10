@@ -32,8 +32,8 @@ public class EntryServiceImpl implements EntryService{
         return entry;
     }
 
-    public Entry getEntry(Entry entry) {
+    public Entry getEntry(Long entryId) {
         log.info("Getting entry");
-        return entryRepository.findById(entry.getId()).orElse(new Entry());
+        return entryRepository.findById(entryId).orElse(new Entry());
     }
 }

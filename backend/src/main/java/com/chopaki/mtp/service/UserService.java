@@ -7,5 +7,5 @@ import java.util.Optional;
 public interface UserService {
     User getUserData(User user);
     void changePassword(User user);
-    String register(User user);
+    Boolean register(User user);
 }

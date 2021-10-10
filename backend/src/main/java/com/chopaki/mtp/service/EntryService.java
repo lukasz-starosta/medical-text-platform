@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface EntryService {
     List<Entry> search(String query);
     Entry postEntry(Entry entry);
-    Entry getEntry(Entry entry);
+    Entry getEntry(Long entry);
 }

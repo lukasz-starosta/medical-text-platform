@@ -27,8 +27,9 @@ jobs:
         run: docker-compose up --build frontend
 
       - name: Login to TreeScale
-        uses: docker/login-action@v1 
+        uses: docker/login-action@v1
         with:
+          registry: repo.treescale.com
           username: ${{ secrets.TREESCALE_USERNAME }}
           password: ${{ secrets.TREESCALE_PASSWORD }}
 

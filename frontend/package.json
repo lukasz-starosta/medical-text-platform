@@ -7,11 +7,16 @@
     "build": "next build",
     "start": "next start",
     "test": "npx jest",
-    "test:watch": "npx jest --watch"
+    "test:watch": "npx jest --watch",
+    "lint": "npx eslint ."
   },
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "antd": "^4.16.1",
     "axios": "^0.21.1",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
     "next": "10.2.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",

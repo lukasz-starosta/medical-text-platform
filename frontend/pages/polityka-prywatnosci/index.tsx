@@ -1,5 +1,4 @@
 import { Layout } from '../../components/Layout/Layout'
-import styles from './privacyPolicy.module.css'
 
 const PrivacyPolicy = () => {
   return (

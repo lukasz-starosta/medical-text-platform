@@ -35,7 +35,7 @@ export default function withAuth(AuthComponent: any) {
         Router.push(HOME_PATH)
       } else {
         try {
-          const response = await axios.get(API_CHECK_PATH)
+          await axios.get(API_CHECK_PATH)
           this.setState({ isLoading: false })
         } catch {
           localStorage.removeItem(TOKEN_KEY)

@@ -2,6 +2,7 @@ version: "3.7"
 services:
 
     database:
+        platform: linux/x86_64
         container_name: database
         build: ./database
         ports:
@@ -20,19 +21,15 @@ services:
         networks:
             - mtp
 
-    # frontend:
-    #     container_name: frontend
-    #     build: ./frontend
-    #     ports:
-    #         - 80:3000
-    #     depends_on:
-    #         - backend
-    #     networks:
-    #         - mtp
-    #     volumes:
-    #         - ./frontend:/app
-    #         - /app/node_modules
-    #         - /app/.next
+    frontend:
+        container_name: frontend
+        build: 
+            context: ./frontend
+            target: production
+        networks:
+            - mtp
+        ports:
+            - 80:3000
 
     # e2e:
     #     image: cypress
@@ -146,7 +143,7 @@ networks:
     mtp:
       name: mtp
 
-volumes:
-    elasticsearch:
+# volumes:
+#     elasticsearch:
 
 

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from './Home.module.css'
-import { Button, Card, Col, Row } from 'antd'
+import { Card, Col, Row } from 'antd'
 import LoginForm from '../components/LoginForm/LoginForm'
 
 export default function Home() {

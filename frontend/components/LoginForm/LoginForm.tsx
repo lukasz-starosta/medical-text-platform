@@ -1,4 +1,4 @@
-import { Form, Input, Button, Checkbox, Card } from 'antd'
+import { Form, Input, Button, Card } from 'antd'
 import { useRouter } from 'next/router'
 import { DASHBOARD_PATH, SIGNUP_PATH } from '../../constants/app_paths'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'

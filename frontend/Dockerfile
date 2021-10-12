@@ -1,15 +1,27 @@
-FROM node:lts-alpine
+FROM node:lts-alpine as base
 
+# Install dependencies only when needed
+FROM base AS deps
 # make the 'app' folder the current working directory
 WORKDIR /app
-
-# copy both 'package.json' and 'package-lock.json' (if available)
 COPY package*.json ./
+RUN npm ci
 
+FROM base as production
+WORKDIR /app
+COPY . .
+COPY --from=deps /app/node_modules ./node_modules
+# copy all files from current directory into the image
 # install project dependencies
-RUN npm install
+RUN npm run lint
+RUN npm run test
+RUN npm run build
+
+FROM base as development
+WORKDIR /app
+COPY . .
+COPY --from=deps /app/node_modules ./node_modules
 
 EXPOSE 3000
-
-# build app for production with minification
+# run app in development
 CMD ["npm", "run", "dev"]

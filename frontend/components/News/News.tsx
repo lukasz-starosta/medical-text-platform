@@ -1,4 +1,3 @@
-import styles from './News.module.css'
 import { Card, Button } from 'antd'
 
 const News = () => {

@@ -1,4 +1,3 @@
-import styles from './SubscriptionInfo.module.css'
 import { Card, Button } from 'antd'
 
 const SubscriptionInfo = () => {

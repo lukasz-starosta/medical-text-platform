@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping("/api/entry")
 public class EntryController {

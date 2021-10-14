@@ -6,14 +6,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost")
+@CrossOrigin("*")
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
 public class UserController {
@@ -37,11 +37,12 @@ public class UserController {
 
     @PostMapping(path = "register")
     public ResponseEntity<?> register(@RequestBody User user) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/register").toUriString());
-        if (userService.register(user)) {
-            return ResponseEntity.created(uri).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
-        }
+        // URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/register").toUriString());
+        // if (userService.register(user)) {
+        //     return ResponseEntity.created(uri).build();
+        // } else {
+        //     return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+        // }
+        return new ResponseEntity("string test", HttpStatus.OK);
     }
 }

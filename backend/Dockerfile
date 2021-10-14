@@ -5,7 +5,7 @@ COPY pom.xml /home/app
 RUN mvn -f /home/app clean install -DskipTests
 
 ####### JAVA ############
-FROM openjdk:15-jdk-alpine
+FROM amd64/openjdk:18-jdk-alpine
 COPY --from=build /home/app/target/*.jar /usr/local/lib/app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/usr/local/lib/app.jar"]

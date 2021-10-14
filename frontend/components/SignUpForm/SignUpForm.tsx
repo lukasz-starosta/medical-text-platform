@@ -9,7 +9,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 
 interface ISignUpForm {
-  login: string
+  username: string
   password: string
   confirmPassword: string
 }
@@ -22,7 +22,7 @@ const SignUpForm = () => {
       if (values.password !== values.confirmPassword) throw new Error()
 
       const response = await axios.post(API_REGISTER_PATH, {
-        login: values.login,
+        username: values.username,
         password: values.password,
       })
       localStorage.setItem(TOKEN_KEY, response.data.token)
@@ -35,7 +35,7 @@ const SignUpForm = () => {
   return (
     <Card title="Zarejestruj się">
       <Form<ISignUpForm> name="signup-form" initialValues={{ remember: true }} onFinish={onFinish}>
-        <Form.Item name="login" rules={[{ required: true, message: 'Wpisz nazwę użytkownika' }]}>
+        <Form.Item name="username" rules={[{ required: true, message: 'Wpisz nazwę użytkownika' }]}>
           <Input
             prefix={<UserOutlined className={styles.icon} />}
             placeholder="Nazwa użytkownika"

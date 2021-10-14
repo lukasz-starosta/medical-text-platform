@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import Link from 'next/link'
 
 interface ILoginForm {
-  login: string
+  username: string
   password: string
 }
 
@@ -30,7 +30,7 @@ const LoginForm = () => {
   return (
     <Card title="Zaloguj się">
       <Form<ILoginForm> name="login-form" initialValues={{ remember: true }} onFinish={onFinish}>
-        <Form.Item name="login" rules={[{ required: true, message: 'Wpisz nazwę użytkownika' }]}>
+        <Form.Item name="username" rules={[{ required: true, message: 'Wpisz nazwę użytkownika' }]}>
           <Input
             prefix={<UserOutlined className={styles.icon} />}
             placeholder="Nazwa użytkownika"

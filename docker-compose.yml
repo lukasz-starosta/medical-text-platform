@@ -2,7 +2,7 @@ version: "3.7"
 services:
 
     database:
-        platform: linux/x86_64
+        # platform: linux/x86_64
         container_name: database
         build: ./database
         ports:
@@ -20,6 +20,26 @@ services:
         depends_on:
             - database
         networks:
+            - mtp
+
+    prometheus:
+        container_name: prometheus
+        build: ./prometheus
+        ports:
+            - 9090:9090
+        depends_on: 
+            - backend
+        networks:
+            - mtp
+    
+    grafana:
+        container_name: grafana
+        image: grafana/grafana
+        ports: 
+            - 3000:3001
+        depends_on:
+            - prometheus
+        networks: 
             - mtp
 
     frontend:

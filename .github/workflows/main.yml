@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.TREESCALE_PASSWORD }}
 
       - name: Tag image
-        run: docker tag medical-text-platform_frontend:latest repo.treescale.com/lukasz-starosta/medical-text-platform:latest
+        run: docker tag medical-text-platform_frontend:latest repo.treescale.com/lukasz-starosta/medical-text-platform_frontend:latest
       
       - name: Push image to TreeScale
-        run: docker push repo.treescale.com/lukasz-starosta/medical-text-platform:latest
+        run: docker push repo.treescale.com/lukasz-starosta/medical-text-platform_frontend:latest

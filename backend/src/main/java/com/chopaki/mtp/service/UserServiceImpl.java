@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     public Boolean register(User user) {
         log.info("Adding new user");
-        if (userRepository.findByUsername(user.getUsername()) == null) {
+        if (user.getUsername() != null && userRepository.findByUsername(user.getUsername()) == null) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
             return true;

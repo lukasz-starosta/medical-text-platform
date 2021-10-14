@@ -3,7 +3,12 @@ import { toast } from 'react-toastify'
 import { TOKEN_KEY } from '../constants/token'
 
 export function interceptRequest(config: AxiosRequestConfig) {
-  config.headers['Authorization'] = `Bearer ${localStorage.getItem(TOKEN_KEY)}`
+  
+  const token = localStorage.getItem(TOKEN_KEY)
+  if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`
+  }
+
   return config
 }
 

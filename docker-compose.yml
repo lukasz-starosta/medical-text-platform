@@ -2,7 +2,7 @@ version: "3.7"
 services:
 
     database:
-        # platform: linux/x86_64
+        platform: linux/x86_64
         container_name: database
         build: ./database
         ports:

@@ -16,6 +16,7 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "http://localhost")
 @RequiredArgsConstructor
+@RequestMapping("/api/entry")
 public class EntryController {
     private final EntryService entryService;
 

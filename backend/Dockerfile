@@ -8,6 +8,7 @@ RUN mvn -f /home/app clean install -DskipTests
 FROM openjdk:15-jdk-alpine
 COPY --from=build /home/app/target/*.jar /usr/local/lib/app.jar
 EXPOSE 8080
+EXPOSE 5001
 ENTRYPOINT ["java","-jar","/usr/local/lib/app.jar"]
 
 

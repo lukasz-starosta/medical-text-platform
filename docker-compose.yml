@@ -2,6 +2,7 @@ version: "3.7"
 services:
 
     database:
+        platform: linux/x86_64
         container_name: database
         build: ./database
         ports:
@@ -10,68 +11,83 @@ services:
             - mtp
 
     backend:
+        platform: linux/x86_64
         container_name: backend
         build: 
             context: ./backend
-            target: prod
         ports:
             - 5001:8080
-            - 5678:5678
         depends_on:
             - database
         networks:
             - mtp
 
-    frontend:
-        container_name: frontend
-        build: ./frontend
+    prometheus:
+        container_name: prometheus
+        build: ./prometheus
         ports:
-            - 80:3000
-        depends_on:
+            - 9090:9090
+        depends_on: 
             - backend
         networks:
             - mtp
-        volumes:
-            - ./frontend:/app
-            - /app/node_modules
-            - /app/.next
-
-    e2e:
-        image: cypress
-        build: ./e2e
-        container_name: cypress
+    
+    grafana:
+        container_name: grafana
+        image: grafana/grafana
+        ports: 
+            - 3000:3001
         depends_on:
-            - frontend
-        # note: inside e2e container, the network allows accessing
-        # "frontend" host under name "frontend"
-        # so "curl http://frontend" would return whatever the frontendserver
-        # in the "frontend" container is cooking
-        # see https://docs.docker.com/compose/networking/
-        environment:
-            - CYPRESS_baseUrl=http://frontend:3000
-        command: npx cypress run
-        # mount the host directory e2e/cypress and the file e2e/cypress.json as
-        # volumes within the container
-        # this means that:
-        #  1. anything that Cypress writes to these folders (e.g., screenshots,
-        #     videos) appears also on the Docker host's filesystem
-        #  2. any change that the developer applies to Cypress files on the host
-        #     machine immediately takes effect within the e2e container (no docker
-        #     rebuild required).
-        networks:
+            - prometheus
+        networks: 
             - mtp
-        volumes:
-            - ./e2e/cypress:/app/cypress
-            - ./e2e/cypress.json:/app/cypress.json
 
-    rabbitmq:
-        container_name: rabbitmq
-        build: ./utils/rabbitmq
-        hostname: localhost
-        ports:
-            - 5672:5672
+    frontend:
+        container_name: frontend
+        build: 
+            context: ./frontend
+            target: production
         networks:
             - mtp
+        ports:
+            - 80:3000
+
+    # e2e:
+    #     image: cypress
+    #     build: ./e2e
+    #     container_name: cypress
+    #     depends_on:
+    #         - frontend
+    #     # note: inside e2e container, the network allows accessing
+    #     # "frontend" host under name "frontend"
+    #     # so "curl http://frontend" would return whatever the frontendserver
+    #     # in the "frontend" container is cooking
+    #     # see https://docs.docker.com/compose/networking/
+    #     environment:
+    #         - CYPRESS_baseUrl=http://frontend:3000
+    #     command: npx cypress run
+    #     # mount the host directory e2e/cypress and the file e2e/cypress.json as
+    #     # volumes within the container
+    #     # this means that:
+    #     #  1. anything that Cypress writes to these folders (e.g., screenshots,
+    #     #     videos) appears also on the Docker host's filesystem
+    #     #  2. any change that the developer applies to Cypress files on the host
+    #     #     machine immediately takes effect within the e2e container (no docker
+    #     #     rebuild required).
+    #     networks:
+    #         - mtp
+    #     volumes:
+    #         - ./e2e/cypress:/app/cypress
+    #         - ./e2e/cypress.json:/app/cypress.json
+
+    # rabbitmq:
+    #     container_name: rabbitmq
+    #     build: ./utils/rabbitmq
+    #     hostname: localhost
+    #     ports:
+    #         - 5672:5672
+    #     networks:
+    #         - mtp
 
 #     elasticsearch:
 #         container_name: elasticsearch
@@ -148,7 +164,7 @@ networks:
     mtp:
       name: mtp
 
-volumes:
-    elasticsearch:
+# volumes:
+#     elasticsearch:
 
 

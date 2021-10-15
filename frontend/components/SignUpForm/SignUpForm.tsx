@@ -1,15 +1,15 @@
-import { Form, Input, Button, Checkbox, Card } from 'antd'
+import { Form, Input, Button, Card } from 'antd'
 import { useRouter } from 'next/router'
 import { DASHBOARD_PATH } from '../../constants/app_paths'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import styles from './SignUpForm.module.css'
-import { API_LOGIN_PATH, API_REGISTER_PATH } from '../../constants/api_paths'
+import { API_REGISTER_PATH } from '../../constants/api_paths'
 import { TOKEN_KEY } from '../../constants/token'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
 interface ISignUpForm {
-  login: string
+  username: string
   password: string
   confirmPassword: string
 }
@@ -22,7 +22,7 @@ const SignUpForm = () => {
       if (values.password !== values.confirmPassword) throw new Error()
 
       const response = await axios.post(API_REGISTER_PATH, {
-        login: values.login,
+        username: values.username,
         password: values.password,
       })
       localStorage.setItem(TOKEN_KEY, response.data.token)
@@ -35,7 +35,7 @@ const SignUpForm = () => {
   return (
     <Card title="Zarejestruj się">
       <Form<ISignUpForm> name="signup-form" initialValues={{ remember: true }} onFinish={onFinish}>
-        <Form.Item name="login" rules={[{ required: true, message: 'Wpisz nazwę użytkownika' }]}>
+        <Form.Item name="username" rules={[{ required: true, message: 'Wpisz nazwę użytkownika' }]}>
           <Input
             prefix={<UserOutlined className={styles.icon} />}
             placeholder="Nazwa użytkownika"

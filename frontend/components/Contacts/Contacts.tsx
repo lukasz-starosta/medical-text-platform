@@ -1,5 +1,5 @@
-import styles from './Contacts.module.css'
-
-const Contacts = () => {}
+const Contacts = () => {
+  return <></>
+}
 
 export default Contacts

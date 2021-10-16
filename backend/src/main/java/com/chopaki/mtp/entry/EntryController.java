@@ -1,20 +1,15 @@
-package com.chopaki.mtp.controller;
+package com.chopaki.mtp.entry;
 
-import com.chopaki.mtp.model.Entry;
-import com.chopaki.mtp.service.EntryService;
-import com.chopaki.mtp.service.EntryServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping("/api/entry")
 public class EntryController {

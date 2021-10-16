@@ -1,23 +1,19 @@
-package com.chopaki.mtp.service;
+package com.chopaki.mtp.entry;
 
-import com.chopaki.mtp.model.Entry;
-import com.chopaki.mtp.repository.EntryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class EntryServiceImpl implements EntryService{
+public class EntryService{
     private final EntryRepository entryRepository;
 
     public List<Entry> search(String query) {

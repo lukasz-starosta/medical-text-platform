@@ -1,6 +1,6 @@
-package com.chopaki.mtp.repository;
+package com.chopaki.mtp.entry;
 
-import com.chopaki.mtp.model.Entry;
+import com.chopaki.mtp.entry.Entry;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

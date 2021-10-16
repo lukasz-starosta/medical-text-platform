@@ -1,4 +1,4 @@
-package com.chopaki.mtp.filter;
+package com.chopaki.mtp.security.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

@@ -12,18 +12,12 @@ public class RegistrationController {
 
     private final RegistrationService registrationService;
 
-    @PostMapping(path = "register")
+    @PostMapping(path = "/register")
     public ResponseEntity<String> register(@RequestBody RegistrationRequest request) {
         return ResponseEntity.ok().body(registrationService.register(request));
-//        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/register").toUriString());
-//        if (userService.register(user)) {
-//            return ResponseEntity.created(uri).build();
-//        } else {
-//            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
-//        }
     }
 
-    @GetMapping
+    @GetMapping(path = "/confirm")
     public ResponseEntity<String> confirm(@RequestParam("token") String token) {
         return ResponseEntity.ok().body(registrationService.confirmToken(token));
     }

@@ -1,6 +1,5 @@
 package com.chopaki.mtp.user;
 
-import com.chopaki.mtp.user.registration.RegistrationRequest;
 import com.chopaki.mtp.user.registration.RegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
     private final RegistrationService registrationService;
+    private final UserRepositoryFirebase userRepositoryFirebase;
 
     @GetMapping(path = "user-info")
     public ResponseEntity<User> getUserInfo(@RequestBody User user) {
@@ -28,5 +28,10 @@ public class UserController {
     @PostMapping(path = "login")
     public ResponseEntity<?> login(@RequestBody User user) {
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(path = "/test")
+    public User get(@RequestParam String username) {
+        return userRepositoryFirebase.findByEmail(username);
     }
 }

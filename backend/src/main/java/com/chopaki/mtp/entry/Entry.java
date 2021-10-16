@@ -9,7 +9,6 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "entries")
 public class Entry {
 
     @SequenceGenerator(

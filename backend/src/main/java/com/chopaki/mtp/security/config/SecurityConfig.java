@@ -34,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/api/auth/login/**").permitAll();
         http.authorizeRequests().antMatchers("/api/auth/register/**").permitAll();
         http.authorizeRequests().antMatchers("/actuator/prometheus").permitAll();
+        http.authorizeRequests().antMatchers("/api/auth/test").permitAll();
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

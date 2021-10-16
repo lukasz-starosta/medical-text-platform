@@ -12,7 +12,6 @@ import java.util.Collections;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "users")
 public class User implements UserDetails {
 
     @SequenceGenerator(
@@ -31,8 +30,8 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
-    private Boolean locked = false;
-    private Boolean enabled = false;
+    private boolean locked = false;
+    private boolean enabled = false;
 
     public User(String username, String email, String password, UserRole userRole) {
         this.username = username;

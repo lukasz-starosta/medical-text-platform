@@ -1,7 +1,7 @@
 import { Form, Input, Button, Card } from 'antd'
 import { useRouter } from 'next/router'
 import { DASHBOARD_PATH } from '../../constants/app_paths'
-import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons'
 import styles from './SignUpForm.module.css'
 import { API_REGISTER_PATH } from '../../constants/api_paths'
 import { TOKEN_KEY } from '../../constants/token'
@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 
 interface ISignUpForm {
   username: string
+  email: string
   password: string
   confirmPassword: string
 }
@@ -23,6 +24,7 @@ const SignUpForm = () => {
 
       const response = await axios.post(API_REGISTER_PATH, {
         username: values.username,
+        email: values.email,
         password: values.password,
       })
       localStorage.setItem(TOKEN_KEY, response.data.token)
@@ -40,6 +42,9 @@ const SignUpForm = () => {
             prefix={<UserOutlined className={styles.icon} />}
             placeholder="Nazwa użytkownika"
           />
+        </Form.Item>
+        <Form.Item name="email" rules={[{ required: true, message: 'Wpisz adres email' }]}>
+          <Input prefix={<MailOutlined className={styles.icon} />} placeholder="Adres email" />
         </Form.Item>
         <Form.Item name="password" rules={[{ required: true, message: 'Wpisz hasło' }]}>
           <Input

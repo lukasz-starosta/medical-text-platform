@@ -12,10 +12,4 @@ public class MtpApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MtpApplication.class, args);
 	}
-
-	@Bean
-	PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
 }

@@ -1,19 +1,16 @@
-package com.chopaki.mtp.filter;
+package com.chopaki.mtp.security.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.chopaki.mtp.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.json.JSONParser;
+import org.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -34,18 +31,17 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-
+        String username = "none";
+        String password = "none";
         try {
-            String test = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-            JSONParser json = new JSONParser(test);
+            JSONObject json = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
+            username = json.getString("username");
+            password = json.getString("password");
+            log.info("Username: {}", username);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String username = request.getParameter("login");
-        String password = request.getParameter("password");
-        log.info("Username: {}", username);
-
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
         return authenticationManager.authenticate(authenticationToken);
     }

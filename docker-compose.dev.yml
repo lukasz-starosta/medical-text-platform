@@ -5,7 +5,6 @@ services:
             - ./frontend/pages:/app/pages
             - ./frontend/constants:/app/constants
             - ./frontend/components:/app/components
-            - ./frontend/.next:/app/.next
             - ./frontend/public:/app/public
             - ./frontend/styles:/app/styles
             - ./frontend/shared:/app/shared

@@ -1,26 +1,15 @@
 version: "3.7"
 services:
 
-    database:
+    backend:
         platform: linux/x86_64
-        container_name: database
-        build: ./database
+        container_name: backend
+        build: 
+            context: ./backend
         ports:
-            - 3306:3306
+            - 5001:8080
         networks:
             - mtp
-
-    # backend:
-    #     platform: linux/x86_64
-    #     container_name: backend
-    #     build: 
-    #         context: ./backend
-    #     ports:
-    #         - 5001:8080
-    #     depends_on:
-    #         - database
-    #     networks:
-    #         - mtp
 
     # prometheus:
     #     container_name: prometheus
@@ -32,25 +21,25 @@ services:
     #     networks:
     #         - mtp
     
-    # grafana:
-    #     container_name: grafana
-    #     image: grafana/grafana
-    #     ports: 
-    #         - 3000:3001
-    #     depends_on:
-    #         - prometheus
-    #     networks: 
-    #         - mtp
+    grafana:
+        container_name: grafana
+        image: grafana/grafana
+        ports: 
+            - 3001:3001
+        depends_on:
+            - prometheus
+        networks: 
+            - mtp
 
-    # frontend:
-    #     container_name: frontend
-    #     build: 
-    #         context: ./frontend
-    #         target: production
-    #     networks:
-    #         - mtp
-    #     ports:
-    #         - 80:3000
+    frontend:
+        container_name: frontend
+        build: 
+            context: ./frontend
+            target: production
+        networks:
+            - mtp
+        ports:
+            - 3000:3000
 
     # elasticsearch:
     #     container_name: elasticsearch

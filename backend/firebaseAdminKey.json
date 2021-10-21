@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "medicaltextplatform",
+  "private_key_id": "505eefd2e28c4eb55b5d951c0b31ffaccd2b5e0f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDTuY/kB2czlHl1\nvVqvhzSH+HdB60YHdc0UnXRkFDZL3GMO8F5lBd5s/vnSiEi8k5m4JGffxPnOiSnd\n3u67TAtfg8BmCo9LF4RFBg6Watewm3M3pp5T+zLlqFHc+l51yCOV9nmjEo2VcMpV\nuuyPqkPFUkIPh8rRMljWVbIsYAXs6d7qZdV+oNdYTfsTxpmg+xurR2CdQLrx0aKD\nLfCF73hcDuv0C1dNGdBnBWLT7xZG5wcBAXDEa7106c9rgAYCgECet9oQiWzzH/09\nNvi+BBO/gFXgeGdftV8/9CJkA6xs7sHSi6OUXNNCbhXDd192JYbKL47gNLGhGQAK\n4NwrOd3RAgMBAAECggEACutyM+bE/Omvq21AesAW6ySkPNIL8spog2yap/AnyZke\nwoBp5eqppMHnOHW8z8bBVoF3USshOb3SSL88yvm8tm0xEjI4g5iY1StfKRdKBdZL\nNFM4GxtyW6PCikF6nCTwcXxcnGAAOz5knbAHRmJzVRGfqQfSrNcBIGDSYuMWX7g9\nk+6nJtFl4Ep0Y6pxilFcbJnvOlRiNm4mrjJq+OIc7h8ygebC8UYpXjaULThadH9z\nv6nr30HSoLPaCH9AWCc121wAl9CnQWVi+NdPtRKVM+We9d4jkpxUsQNwSQeNCiT0\ncQQBBSRhapWVf/z3j1vIOTjJ9ZYsNI1gZKpzdPHujwKBgQDuLz7NsD0TXuRwaFvs\naPWH6cTS3uJmoKUlW6QD9N8sykrO0mh2venha7zZRskcoFfi/uGHDGvKPxyH2TBG\nUYG9NY3J67HpuNwWXyWpt3sPSmbWHqy4eJyOqrIz3M+kLBqZbksHe+KsZMamyOwy\nf72IKf3F1tKm/3LDkjuholDX9wKBgQDjj6qwd1okleI3c4/OHNV52zkRebFTAXmo\nVi44NMaa+qt6cwztfHd2dvvcYtoOYbQ9MXg+EQwt/INUoEvNAF/UnktdRnpZdxPZ\nwiL9Z6nciMAxbE/0Eg2ZUR8PDfxw0QNECGcJ55tJx0B0smUUxwW8CnhhjjIkZHPF\nkfWKIIvWdwKBgFVS3Wenq6llw+W0rMFatCI1DwoPSAFFqQNh+bZlIRGVggjm/P8U\nd1UGWEdpgR/dHL63WakcPPzdcOYFWrLF/fj+10UvRrOYQldNTFuo28+VcpNft7X5\nlvPQmDfV8Rg5qGmwRfZvXbst+q/CqEJK2mWNzVfy5dFnDwCaQPxc/iLvAoGATnAx\nB868FaxMY4zD3un1c6FrFGj8BH6Xrry2Bc27P6R0AysxI5Mpon305sx0GUz4UbeB\nmPNLXXaS1lLCjhE49xLxK1+lwLzY7NCMOwjGdiv1A5QwIxMt+NELgabygvioxYSX\n78QTtOSnhRIQ4Y6QnXaGdCoNgpnVhh5/onMBgJUCgYEA2IEtRDzo+MDw0xhP7DCZ\nbzcopjfcrWXNMRRFT6Lv+JEH99Z/Kxm+ktTFlrxzW19IesYkBmnA1MzgN+zF8mhO\ndag4TDqIMu9MzWlAhV7Y6jjp9tjA7TGemfT+W36gEX7G6Ms8rk8vHGtCZ2G32H1Q\nXxj/pyk53hAKEas5y+2Jyns=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-c62gn@medicaltextplatform.iam.gserviceaccount.com",
+  "client_id": "108002955219060315735",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-c62gn%40medicaltextplatform.iam.gserviceaccount.com"
+}

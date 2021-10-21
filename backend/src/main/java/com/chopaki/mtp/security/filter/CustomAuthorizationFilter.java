@@ -1,4 +1,4 @@
-package com.chopaki.mtp.filter;
+package com.chopaki.mtp.security.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -42,9 +42,9 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     filterChain.doFilter(httpServletRequest, httpServletResponse);
                 } catch (Exception e) {
                     log.error("Error logging in, {}", e.getMessage());
-                    httpServletResponse.setHeader("error while validating token, {}", e.getMessage());
-                    httpServletResponse.setStatus(HttpStatus.FORBIDDEN.value());
-//                    httpServletResponse.sendError(HttpStatus.FORBIDDEN.value());
+//                    httpServletResponse.setHeader("error while validating token, {}", e.getMessage());
+//                    httpServletResponse.setStatus(HttpStatus.FORBIDDEN.value());
+                    httpServletResponse.sendError(HttpStatus.FORBIDDEN.value());
                     Map<String, String> error = new HashMap<>();
                     error.put("error_message", e.getMessage());
                     httpServletResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);

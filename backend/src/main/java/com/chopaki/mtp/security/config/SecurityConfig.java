@@ -31,8 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/api/auth/login/**").permitAll();
-        http.authorizeRequests().antMatchers("/api/auth/register/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/auth/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/**").permitAll();
         http.authorizeRequests().antMatchers("/actuator/prometheus").permitAll();
         http.authorizeRequests().antMatchers("/api/auth/test").permitAll();
         http.authorizeRequests().anyRequest().authenticated();

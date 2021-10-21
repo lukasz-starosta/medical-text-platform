@@ -7,6 +7,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -15,17 +16,17 @@ import java.util.List;
 public class EntryController {
     private final EntryService entryService;
 
-    @GetMapping(path = "search")
+    @GetMapping(path = "/search")
     public ResponseEntity<List<Entry>> search(@RequestParam String query) {
         return ResponseEntity.ok().body(entryService.search(query));
     }
 
-    @GetMapping(path = "entry")
-    public ResponseEntity<Entry> getEntry(@RequestParam Long entryId) {
+    @GetMapping(path = "/entry")
+    public ResponseEntity<Entry> getEntry(@RequestParam UUID entryId) {
         return ResponseEntity.ok().body(entryService.getEntry(entryId));
     }
 
-    @PostMapping(path = "entry")
+    @PostMapping(path = "/entry")
     public ResponseEntity<Entry> postEntry(@RequestBody Entry entry) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/entry").toUriString());
         return ResponseEntity.created(uri).body(entryService.postEntry(entry));

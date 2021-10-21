@@ -1,31 +1,30 @@
 package com.chopaki.mtp.user.registration;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.chopaki.mtp.email.EmailSender;
 import com.chopaki.mtp.user.User;
+import com.chopaki.mtp.user.UserRepository;
 import com.chopaki.mtp.user.UserRole;
 import com.chopaki.mtp.user.UserService;
-import com.chopaki.mtp.user.registration.token.ConfirmationToken;
-import com.chopaki.mtp.user.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class RegistrationService {
 
     private final UserService userService;
-    private final EmailValidator emailValidator;
-    private final ConfirmationTokenService confirmationTokenService;
+    private final UserRepository userRepository;
     private final EmailSender emailSender;
     private final static String LINK_BASE = "http://localhost:5001/api/auth/confirm?token=";
 
     public String register(RegistrationRequest request) {
-        if (!emailValidator.test(request.getEmail())) {
-            throw new IllegalStateException("Email not valid");
-        }
+        log.info("Registering user: " + request.getUsername());
 
         String token = userService.signUpUser(new User(
                 request.getUsername(),
@@ -38,25 +37,16 @@ public class RegistrationService {
         return token;
     }
 
-    @Transactional
     public String confirmToken(String token) {
-        ConfirmationToken confirmationToken = confirmationTokenService
-                .getToken(token)
-                .orElseThrow(() ->
-                        new IllegalStateException("Token not found"));
-        if (confirmationToken.getConfirmedAt() != null) {
-            throw new IllegalStateException("Email already confirmed");
-        }
+        log.info("Confirming token: " + token);
 
-        LocalDateTime expiredAt = confirmationToken.getExpiredAt();
-        if (expiredAt.isBefore(LocalDateTime.now())) {
-            throw new IllegalStateException("Token Expired");
-        }
+        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+        JWTVerifier verifier = JWT.require(algorithm).build();
+        DecodedJWT decoded = verifier.verify(token);
+        String username = decoded.getSubject();
 
-        confirmationTokenService.setConfirmedAt(token);
-        userService.enableUser(
-                confirmationToken.getUser()
-        );
+        userService.enableUser(userRepository.findByUsername(username));
+        log.info("Token confirmed");
         return "confirmed";
     }
 

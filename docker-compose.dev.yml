@@ -10,3 +10,8 @@ services:
             - ./frontend/shared:/app/shared
         build:
             target: development
+
+    nlp:
+        volumes:
+            - ./nlp:/app
+    

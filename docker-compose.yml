@@ -1,141 +1,51 @@
 version: "3.7"
 services:
+  backend:
+    platform: linux/x86_64
+    container_name: backend
+    build:
+      context: ./backend
+    ports:
+      - 5001:8080
+    networks:
+      - mtp
 
-    backend:
-        platform: linux/x86_64
-        container_name: backend
-        build: 
-            context: ./backend
-        ports:
-            - 5001:8080
-        networks:
-            - mtp
+  prometheus:
+    container_name: prometheus
+    build: ./prometheus
+    ports:
+      - 9090:9090
+    depends_on:
+      - backend
+    networks:
+      - mtp
 
-    prometheus:
-        container_name: prometheus
-        build: ./prometheus
-        ports:
-            - 9090:9090
-        depends_on: 
-            - backend
-        networks:
-            - mtp
-    
-    grafana:
-        container_name: grafana
-        image: grafana/grafana
-        ports: 
-            - 3001:3001
-        depends_on:
-            - prometheus
-        networks: 
-            - mtp
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    ports:
+      - 3001:3001
+    depends_on:
+      - prometheus
+    networks:
+      - mtp
 
-    nlp:
-        container_name: nlp
-        build: ./nlp
-        ports:
-            - 5000:5000
+  nlp:
+    container_name: nlp
+    build: ./nlp
+    ports:
+      - 5000:5000
 
-    frontend:
-        container_name: frontend
-        build: 
-            context: ./frontend
-            target: production
-        networks:
-            - mtp
-        ports:
-            - 3000:3000
-
-    # elasticsearch:
-    #     container_name: elasticsearch
-    #     image: elasticsearch:7.9.2
-    #     ports:
-    #         - 9200:9200
-    #     environment:
-    #         - discovery.type=single-node
-    #     ulimits:
-    #         memlock:
-    #             soft: -1
-    #             hard: -1
-    #     networks:
-    #         - mtp
-
-    # kibana:
-    #     container_name: kibana
-    #     image: kibana:7.9.2
-    #     ports:
-    #         - 5601:5601
-    #     networks:
-    #         - mtp
-        
-    # logstash:
-    #     constainer_name: logstash
-    #     image: logstash:7.9.2
-    #     ports:
-    #         - 5000:5000
-    #     volumes:
-    #         - type: bind
-    #           source: ./logstash_pipeline/
-    #           target: /usr/share/logstash/pipeline
-    #           read_only: true
-    #     networks:
-    #         - mtp
-
-    # e2e:
-    #     image: cypress
-    #     build: ./e2e
-    #     container_name: cypress
-    #     depends_on:
-    #         - frontend
-    #     # note: inside e2e container, the network allows accessing
-    #     # "frontend" host under name "frontend"
-    #     # so "curl http://frontend" would return whatever the frontendserver
-    #     # in the "frontend" container is cooking
-    #     # see https://docs.docker.com/compose/networking/
-    #     environment:
-    #         - CYPRESS_baseUrl=http://frontend:3000
-    #     command: npx cypress run
-    #     # mount the host directory e2e/cypress and the file e2e/cypress.json as
-    #     # volumes within the container
-    #     # this means that:
-    #     #  1. anything that Cypress writes to these folders (e.g., screenshots,
-    #     #     videos) appears also on the Docker host's filesystem
-    #     #  2. any change that the developer applies to Cypress files on the host
-    #     #     machine immediately takes effect within the e2e container (no docker
-    #     #     rebuild required).
-    #     networks:
-    #         - mtp
-    #     volumes:
-    #         - ./e2e/cypress:/app/cypress
-    #         - ./e2e/cypress.json:/app/cypress.json
-
-    # rabbitmq:
-    #     container_name: rabbitmq
-    #     build: ./utils/rabbitmq
-    #     hostname: localhost
-    #     ports:
-    #         - 5672:5672
-    #     networks:
-    #         - mtp
-
-
-# configs:
-#     elastic_config:
-#         file: ./utils/elasticsearch/config/elasticsearch.yml
-#     logstash_config:
-#         file: ./utils/logstash/config/logstash.yml
-#     logstash_pipeline:
-#         file: ./utils/logstash/pipeline/logstash.conf
-#     kibana_config:
-#         file: ./utils/kibana/config/kibana.yml
-
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      target: production
+    networks:
+      - mtp
+    ports:
+      - 3000:3000
 
 networks:
-    mtp:
-      name: mtp
-
-# volumes:
-#     elasticsearch:
-
-
+  mtp:
+    name: mtp

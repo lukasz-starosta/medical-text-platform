@@ -1,17 +1,16 @@
 # Add additional configuration for development here
 services:
-    frontend:
-        volumes:
-            - ./frontend/pages:/app/pages
-            - ./frontend/constants:/app/constants
-            - ./frontend/components:/app/components
-            - ./frontend/public:/app/public
-            - ./frontend/styles:/app/styles
-            - ./frontend/shared:/app/shared
-        build:
-            target: development
+  frontend:
+    volumes:
+      - ./frontend/pages:/app/pages
+      - ./frontend/constants:/app/constants
+      - ./frontend/components:/app/components
+      - ./frontend/public:/app/public
+      - ./frontend/styles:/app/styles
+      - ./frontend/shared:/app/shared
+    build:
+      target: development
 
-    nlp:
-        volumes:
-            - ./nlp:/app
-    
+  nlp:
+    volumes:
+      - ./nlp:/app

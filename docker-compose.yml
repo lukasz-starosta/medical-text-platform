@@ -11,15 +11,15 @@ services:
         networks:
             - mtp
 
-    # prometheus:
-    #     container_name: prometheus
-    #     build: ./prometheus
-    #     ports:
-    #         - 9090:9090
-    #     depends_on: 
-    #         - backend
-    #     networks:
-    #         - mtp
+    prometheus:
+        container_name: prometheus
+        build: ./prometheus
+        ports:
+            - 9090:9090
+        depends_on: 
+            - backend
+        networks:
+            - mtp
     
     grafana:
         container_name: grafana

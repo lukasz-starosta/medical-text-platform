@@ -3,8 +3,8 @@ import { toast } from 'react-toastify'
 import { TOKEN_KEY } from '../constants/token'
 
 export function interceptRequest(config: AxiosRequestConfig) {
-  
   const token = localStorage.getItem(TOKEN_KEY)
+  debugger
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`
   }

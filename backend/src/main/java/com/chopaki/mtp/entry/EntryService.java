@@ -3,6 +3,7 @@ package com.chopaki.mtp.entry;
 import com.google.cloud.Timestamp;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;

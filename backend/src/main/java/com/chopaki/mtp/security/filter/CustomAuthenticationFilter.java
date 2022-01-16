@@ -27,6 +27,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     public CustomAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
+        this.setFilterProcessesUrl("/api/auth/login");
     }
 
     @Override
@@ -56,13 +57,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .withIssuer(request.getRequestURL().toString())
                 .sign(algorithm);
 
-//        String refreshToken = JWT.create()
-//                .withSubject(user.getUsername())
-//                .withExpiresAt(new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000))
-//                .withIssuer(request.getRequestURL().toString())
-//                .sign(algorithm);
-
-//        response.setHeader("accessToken", accessToken);
         Map<String, String> tokens = new HashMap<>();
         tokens.put("accessToken", accessToken);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);

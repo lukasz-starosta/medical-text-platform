@@ -26,7 +26,7 @@ import java.util.Map;
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        if (httpServletRequest.getServletPath().equals("/login")) {
+        if (httpServletRequest.getServletPath().equals("/api/auth/login")) {
             filterChain.doFilter(httpServletRequest, httpServletResponse);
         } else {
             String authorizationHeader = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);

@@ -4,6 +4,7 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -11,7 +12,15 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public class EntryRepository {
-    CollectionReference db = FirestoreClient.getFirestore().collection("entries");
+    private Firestore firestore;
+    private CollectionReference db;
+    
+    @Autowired
+    public EntryRepository(Firestore firestore) {
+        this.firestore = firestore;
+        this.db = firestore.collection("entries");
+    }
+
 
     public List<Entry> findByDescriptionShortContaining(String query) {
         List<Entry> results = new ArrayList<>();

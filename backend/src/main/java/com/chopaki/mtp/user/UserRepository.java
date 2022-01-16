@@ -1,5 +1,5 @@
 package com.chopaki.mtp.user;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
@@ -9,7 +9,15 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public class UserRepository {
-    CollectionReference db = FirestoreClient.getFirestore().collection("users");
+    private Firestore firestore;
+    private CollectionReference db;
+    
+    @Autowired
+    public UserRepository(Firestore firestore) {
+        this.firestore = firestore;
+        this.db = this.firestore.collection("users");
+    }
+
 
     public User findByUsername(String username) {
         try {

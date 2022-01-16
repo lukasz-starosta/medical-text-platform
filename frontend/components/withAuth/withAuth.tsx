@@ -3,8 +3,6 @@ import Router from 'next/router'
 import { Spin } from 'antd'
 import { TOKEN_KEY } from '../../constants/token'
 import { HOME_PATH } from '../../constants/app_paths'
-import axios from 'axios'
-import { API_CHECK_PATH } from '../../constants/api_paths'
 
 export default function withAuth(AuthComponent: any) {
   return class Authenticated extends Component {
@@ -35,7 +33,6 @@ export default function withAuth(AuthComponent: any) {
         Router.push(HOME_PATH)
       } else {
         try {
-          await axios.get(API_CHECK_PATH)
           this.setState({ isLoading: false })
         } catch {
           localStorage.removeItem(TOKEN_KEY)

@@ -9,14 +9,15 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public class UserRepository {
-    @Autowired
     private Firestore firestore;
-
+    private CollectionReference db;
+    
+    @Autowired
     public UserRepository(Firestore firestore) {
         this.firestore = firestore;
+        this.db = this.firestore.collection("users");
     }
 
-    CollectionReference db = firestore.collection("users");
 
     public User findByUsername(String username) {
         try {

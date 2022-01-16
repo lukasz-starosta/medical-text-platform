@@ -10,25 +10,25 @@ services:
     networks:
       - mtp
 
-  prometheus:
-    container_name: prometheus
-    build: ./prometheus
-    ports:
-      - 9090:9090
-    depends_on:
-      - backend
-    networks:
-      - mtp
+  # prometheus:
+  #   container_name: prometheus
+  #   build: ./prometheus
+  #   ports:
+  #     - 9090:9090
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - mtp
 
-  grafana:
-    container_name: grafana
-    image: grafana/grafana
-    ports:
-      - 3001:3001
-    depends_on:
-      - prometheus
-    networks:
-      - mtp
+  # grafana:
+  #   container_name: grafana
+  #   image: grafana/grafana
+  #   ports:
+  #     - 3001:3001
+  #   depends_on:
+  #     - prometheus
+  #   networks:
+  #     - mtp
 
   nlp:
     container_name: nlp

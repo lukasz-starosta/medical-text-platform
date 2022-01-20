@@ -31,4 +31,9 @@ public class EntryController {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/entry").toUriString());
         return ResponseEntity.created(uri).body(entryService.postEntry(entry));
     }
+
+    @GetMapping(path = "/keywords")
+    public ResponseEntity<List<Entry>> test(@RequestParam String keyword) {
+        return ResponseEntity.ok().body(entryService.searchByKeyword(keyword));
+    }
 }

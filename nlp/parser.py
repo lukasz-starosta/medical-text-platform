@@ -4,6 +4,7 @@ import stanza
 stanza.download('en', package='mimic', processors={'ner': 'i2b2'})
 nlp = stanza.Pipeline('en', package='mimic', processors={'ner': 'i2b2'})
 
+
 def parse_text(text):
     doc = nlp(text)
     print(doc.entities)

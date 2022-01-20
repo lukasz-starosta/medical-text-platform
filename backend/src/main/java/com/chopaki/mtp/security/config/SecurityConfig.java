@@ -31,24 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        http.formLogin().loginPage("/api/auth/login");
-//        http.formLogin().loginProcessingUrl("/api/auth/login");
-//        http.authorizeRequests().antMatchers("/api/auth/login").permitAll();
-//        http.authorizeRequests().antMatchers("/login").permitAll();
         http.authorizeRequests().antMatchers("/api/auth/**").permitAll();
         http.authorizeRequests().antMatchers("/actuator/prometheus").permitAll();
         http.authorizeRequests().anyRequest().authenticated();
-//        http.addFilter(getCustomAuthenticationFilter(authenticationManagerBean()));
         http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
-
-//    @Bean
-//    public CustomAuthenticationFilter getCustomAuthenticationFilter(AuthenticationManager authenticationManager) {
-//        CustomAuthenticationFilter filter = new CustomAuthenticationFilter(authenticationManager);
-//        filter.setFilterProcessesUrl("/api/auth/login");
-//        return filter;
-//    }
 
     @Bean
     @Override

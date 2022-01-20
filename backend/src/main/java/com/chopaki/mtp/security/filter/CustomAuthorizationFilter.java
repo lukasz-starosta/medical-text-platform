@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,10 +41,8 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                     filterChain.doFilter(httpServletRequest, httpServletResponse);
-                } catch (Exception e) {
+                } catch (AccessDeniedException e) {
                     log.error("Error logging in, {}", e.getMessage());
-//                    httpServletResponse.setHeader("error while validating token, {}", e.getMessage());
-//                    httpServletResponse.setStatus(HttpStatus.FORBIDDEN.value());
                     httpServletResponse.sendError(HttpStatus.FORBIDDEN.value());
                     Map<String, String> error = new HashMap<>();
                     error.put("error_message", e.getMessage());

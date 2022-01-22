@@ -1,0 +1,44 @@
+.problem,
+.test,
+.treatment {
+  position: relative;
+  color: black;
+  padding: 0 2px;
+  cursor: pointer;
+}
+.problem {
+  background-color: rgba(255, 99, 71, 0.3);
+}
+.test {
+  background-color: rgba(0, 174, 255, 0.3);
+}
+.treatment {
+  background-color: rgba(0, 255, 34, 0.3);
+}
+
+.problem:hover::after,
+.test:hover::after,
+.treatment:hover::after {
+  position: absolute;
+  top: -2rem;
+  left: 0;
+  width: 5rem;
+  padding: 4px;
+  border-radius: 4px;
+  text-align: center;
+  color: white;
+}
+
+.problem:hover::after {
+  background-color: rgba(255, 99, 71, 0.9);
+  content: 'Problem';
+}
+.test:hover::after {
+  background-color: rgba(0, 174, 255, 0.9);
+  content: 'Test';
+}
+.treatment:hover::after {
+  background-color: rgba(0, 255, 34, 0.9);
+  color: black;
+  content: 'Treatment';
+}

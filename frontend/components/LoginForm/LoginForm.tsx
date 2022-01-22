@@ -4,7 +4,7 @@ import { DASHBOARD_PATH, SIGNUP_PATH } from '../../constants/app_paths'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import styles from './LoginForm.module.css'
 import { API_LOGIN_PATH } from '../../constants/api_paths'
-import { TOKEN_KEY } from '../../constants/storage'
+import { LOGIN, TOKEN_KEY } from '../../constants/storage'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Link from 'next/link'
@@ -21,6 +21,7 @@ const LoginForm = () => {
     try {
       const response = await axios.post(API_LOGIN_PATH, { ...values })
       localStorage.setItem(TOKEN_KEY, response.data.accessToken)
+      localStorage.setItem(LOGIN, values.username)
       router.push(DASHBOARD_PATH)
     } catch {
       toast('Podano nieprawidłowe dane. Spróbuj ponownie.', { type: 'error' })

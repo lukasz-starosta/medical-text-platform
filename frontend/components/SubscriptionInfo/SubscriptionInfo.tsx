@@ -3,8 +3,8 @@ import { Card, Button } from 'antd'
 const SubscriptionInfo = () => {
   return (
     <div>
-      <Card title="Twoja subskrypcja" extra={<Button type="link">Więcej...</Button>}>
-        <p>Ważność Twojej subksrypcji upłynie 18 listopada 2021 roku</p>
+      <Card title="Dziel się wiedzą" extra={<Button type="link">Więcej...</Button>}>
+        <p>Już teraz dodaj wpis, wspomóż świat medyczny swoim doświadczeniem!</p>
       </Card>
     </div>
   )

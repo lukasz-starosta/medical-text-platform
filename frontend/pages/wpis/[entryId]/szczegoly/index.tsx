@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react'
 import { Layout } from '../../../../components/Layout/Layout'
 import { API_ENTRY_PATH } from '../../../../constants/api_paths'
 import { Entry } from '../../../../shared/types/entry'
-import { Card } from 'antd'
+import { Card, Skeleton } from 'antd'
+import Description from './Description'
 const { Meta } = Card
 
 const PostDetails = () => {
@@ -24,8 +25,24 @@ const PostDetails = () => {
 
   return (
     <Layout title="Szczegóły">
-      <Card style={{ width: '100%', marginTop: 16 }} loading={loading}>
-        <Meta title={entry?.descriptionShort} description={entry?.descriptionLong} />
+      <Card style={{ width: '100%', marginTop: 16 }}>
+        <Skeleton loading={loading}>
+          {entry && (
+            <Meta
+              title={entry?.descriptionShort}
+              description={
+                <Description
+                  author={entry.author}
+                  seconds={entry.entryDate.seconds}
+                  description={entry?.descriptionLong}
+                  problems={entry?.problems}
+                  tests={entry?.tests}
+                  treatments={entry?.treatments}
+                />
+              }
+            />
+          )}
+        </Skeleton>
       </Card>
     </Layout>
   )

@@ -11,6 +11,7 @@
   padding: 30px;
   padding-left: 60px;
   padding-right: 60px;
+  max-width: 75%;
 }
 .title {
   font-size: 25px;

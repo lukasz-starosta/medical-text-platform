@@ -4,8 +4,10 @@ const News = () => {
   return (
     <div>
       <Card title="Co nowego" extra={<Button type="link">Więcej...</Button>}>
-        <p>Nowa aktualizacja wprowadza możliwość konwersacji z innymi użytkownikami</p>
-        <p>Teraz aplikacja dostępna również w języku angielskim</p>
+        <p>
+          Nowa aktualizacja wprowadza możliwość wyszukiwania informacji na temat danych słów
+          kluczowych
+        </p>
       </Card>
     </div>
   )

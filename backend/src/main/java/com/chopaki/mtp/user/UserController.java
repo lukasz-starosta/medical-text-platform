@@ -20,4 +20,9 @@ public class UserController {
     public ResponseEntity<Boolean> changePassword(@RequestBody String json) {
         return ResponseEntity.ok().body(userService.changePassword(json));
     }
+    
+    @PostMapping(path = "/login")
+    public ResponseEntity<?> login(@RequestBody User user) {
+        return ResponseEntity.ok().build();
+    }
 }

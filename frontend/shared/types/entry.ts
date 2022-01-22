@@ -4,6 +4,7 @@ export interface EntryForm {
 }
 
 export type Entry = {
+  author: string
   id: string
   descriptionLong: string
   descriptionShort: string

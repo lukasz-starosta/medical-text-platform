@@ -57,6 +57,11 @@ public class EntryService{
         return entryRepository.findById(entryId);
     }
 
+    public boolean deleteEntry(UUID entryId) {
+        log.info("Deleting entry");
+        return entryRepository.deleteById(entryId);
+    }
+
     @SneakyThrows
     private void extractKeywords(String rawKeywords, Entry entry) {
         Set<String> treatments = new HashSet<>();

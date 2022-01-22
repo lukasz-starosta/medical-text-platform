@@ -36,4 +36,9 @@ public class EntryController {
     public ResponseEntity<List<Entry>> test(@RequestParam String keyword) {
         return ResponseEntity.ok().body(entryService.searchByKeyword(keyword));
     }
+
+    @DeleteMapping(path = "/entry")
+    public ResponseEntity<Boolean> deleteEntry(@RequestParam UUID entryId) {
+        return ResponseEntity.ok().body(entryService.deleteEntry(entryId));
+    }
 }

@@ -63,7 +63,7 @@ public class EntryRepository {
 
     public Entry findById(UUID entryId) {
         try {
-            ApiFuture<QuerySnapshot> future = db.whereEqualTo("id", entryId).get();
+            ApiFuture<QuerySnapshot> future = db.whereEqualTo("id", entryId.toString()).get();
             List<QueryDocumentSnapshot> documents = future.get().getDocuments();
             if (!documents.isEmpty()) {
                 return documents.get(0).toObject(Entry.class);
@@ -72,5 +72,19 @@ public class EntryRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public boolean deleteById(UUID entryId) {
+        try {
+            ApiFuture<QuerySnapshot> future = db.whereEqualTo("id", entryId.toString()).get();
+            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            if (!documents.isEmpty()) {
+                documents.get(0).getReference().delete();
+                return true;
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

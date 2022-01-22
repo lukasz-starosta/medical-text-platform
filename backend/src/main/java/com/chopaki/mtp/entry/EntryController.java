@@ -41,4 +41,9 @@ public class EntryController {
     public ResponseEntity<Boolean> deleteEntry(@RequestParam UUID entryId) {
         return ResponseEntity.ok().body(entryService.deleteEntry(entryId));
     }
+
+    @GetMapping(path = "/entries")
+    public ResponseEntity<List<Entry>> getEntriesForUser() {
+        return ResponseEntity.ok().body(entryService.getEntriesForUser());
+    }
 }

@@ -87,4 +87,18 @@ public class EntryRepository {
         }
         return false;
     }
+
+    public List<Entry> getEntriesForUser(String username) {
+        List<Entry> results = new ArrayList<>();
+        try {
+            ApiFuture<QuerySnapshot> future = db.whereEqualTo("author", username).get();
+            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            for (QueryDocumentSnapshot doc : documents) {
+                results.add(doc.toObject(Entry.class));
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
 }

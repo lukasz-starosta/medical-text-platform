@@ -13,6 +13,7 @@ public class Entry {
     private Timestamp entryDate;
     private String descriptionShort;
     private String descriptionLong;
+    private String author;
     private List<String> treatments;
     private List<String> tests;
     private List<String> problems;

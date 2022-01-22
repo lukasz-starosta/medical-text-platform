@@ -4,7 +4,10 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,8 +40,23 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(user.getId());
     }
 
-    public void changePassword(User user) {
-        log.info("Changing password");
+    public boolean changePassword(String raw) {
+        JSONObject json = new JSONObject(raw);
+        String oldP = json.getString("oldPassword");
+        String newP = json.getString("newPassword");
+
+        if (!passwordEncoder.encode(oldP).equals(passwordEncoder.encode(newP))) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            User user = userRepository.findByUsername(authentication.getName());
+            if (passwordEncoder.matches(oldP, user.getPassword())) {
+                log.info("Changing password");
+                return userRepository.changePassword(user.getUsername(), passwordEncoder.encode(newP));
+            } else {
+                throw new IllegalStateException("Current password does not match");
+            }
+        } else {
+            throw new IllegalStateException("New password is the same as the current one");
+        }
     }
 
     public String signUpUser(User user) {

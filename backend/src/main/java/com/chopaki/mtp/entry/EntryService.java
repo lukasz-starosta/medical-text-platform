@@ -10,6 +10,8 @@ import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -47,6 +49,9 @@ public class EntryService{
         String rawKeywords = restTemplate.postForObject("http://localhost:5000/nlp/parse", request, String.class);
         extractKeywords(rawKeywords, entry);
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        entry.setAuthor(authentication.getName());
+
         log.info("Posting entry");
         entryRepository.save(entry);
         return entry;
@@ -55,6 +60,11 @@ public class EntryService{
     public Entry getEntry(UUID entryId) {
         log.info("Getting entry");
         return entryRepository.findById(entryId);
+    }
+
+    public List<Entry> getEntriesForUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return entryRepository.getEntriesForUser(authentication.getName());
     }
 
     public boolean deleteEntry(UUID entryId) {

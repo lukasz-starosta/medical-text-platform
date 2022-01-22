@@ -4,4 +4,5 @@ export const API_LOGIN_PATH = `${API_PATH}/auth/login`
 export const API_REGISTER_PATH = `${API_PATH}/auth/register`
 
 export const API_SEARCH_PATH = `${API_PATH}/search`
-export const API_ENTRY_PATH = `${API_PATH}/entry`
+export const API_SEARCH_KEYWORDS_PATH = `${API_PATH}/entry/keywords`
+export const API_ENTRY_PATH = `${API_PATH}/entry/entry`

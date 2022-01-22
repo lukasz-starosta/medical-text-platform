@@ -25,9 +25,9 @@ export const EntryTable: FC<Props> = ({ data, title = '', loading = false }) => 
       title: 'Data dodania',
       dataIndex: 'entryDate',
       key: 'entryDate',
-      sorter: (a, b) => new Date(a.entryDate).getTime() - new Date(b.entryDate).getTime(),
-      render: (date: string) => {
-        return formatDate(date)
+      sorter: (a, b) => a.entryDate.seconds - b.entryDate.seconds,
+      render: (date: Entry['entryDate']) => {
+        return formatDate(new Date(date.seconds * 1000))
       },
     },
     {
@@ -35,7 +35,7 @@ export const EntryTable: FC<Props> = ({ data, title = '', loading = false }) => 
       key: 'action',
       render: (entry: Entry) => (
         <Space size="middle">
-          <Link href={POSTDETAILS_PATH(entry.entryID)}>Szczegóły</Link>
+          <Link href={POSTDETAILS_PATH(entry.id)}>Szczegóły</Link>
         </Space>
       ),
     },

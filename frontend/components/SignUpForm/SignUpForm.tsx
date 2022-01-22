@@ -4,7 +4,7 @@ import { DASHBOARD_PATH } from '../../constants/app_paths'
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons'
 import styles from './SignUpForm.module.css'
 import { API_REGISTER_PATH } from '../../constants/api_paths'
-import { TOKEN_KEY } from '../../constants/token'
+import { TOKEN_KEY } from '../../constants/storage'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 

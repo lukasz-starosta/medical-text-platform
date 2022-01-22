@@ -9,7 +9,7 @@ import {
   HOME_PATH,
   PRIVACY_PATH,
 } from '../../constants/app_paths'
-import { TOKEN_KEY } from '../../constants/token'
+import { TOKEN_KEY } from '../../constants/storage'
 
 const Navbar = () => {
   const router = useRouter()

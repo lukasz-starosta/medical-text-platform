@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>MedicalTextPlatform</title>
       </Head>
       <Component {...pageProps} />
-      <ToastContainer />
+      <ToastContainer limit={1} />
     </>
   )
 }

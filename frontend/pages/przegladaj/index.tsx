@@ -1,7 +1,7 @@
 import styles from './browser.module.css'
 import { Input } from 'antd'
 import { Layout } from '../../components/Layout/Layout'
-import { API_SEARCH_PATH } from '../../constants/api_paths'
+import { API_SEARCH_KEYWORDS_PATH } from '../../constants/api_paths'
 import axios from 'axios'
 import { Space } from 'antd'
 import { useState } from 'react'
@@ -15,7 +15,7 @@ const Browser = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const onSearch = async (value: string) => {
     setLoading(true)
-    const response = await axios.get(API_SEARCH_PATH, { params: { query: value } })
+    const response = await axios.get(API_SEARCH_KEYWORDS_PATH, { params: { keyword: value } })
     setData(response?.data)
     setLoading(false)
   }
@@ -25,7 +25,7 @@ const Browser = () => {
       <Space direction="vertical" size="large" style={{ width: '100%' }}>
         <Search
           className={styles.searchBar}
-          placeholder="Wpisz frazę lub słowa kluczowe"
+          placeholder="Wpisz frazę lub słowo kluczowe"
           allowClear
           enterButton
           onSearch={onSearch}

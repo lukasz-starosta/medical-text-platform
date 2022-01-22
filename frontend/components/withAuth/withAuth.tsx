@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Router from 'next/router'
 import { Spin } from 'antd'
-import { TOKEN_KEY } from '../../constants/token'
+import { TOKEN_KEY } from '../../constants/storage'
 import { HOME_PATH } from '../../constants/app_paths'
 
 export default function withAuth(AuthComponent: any) {

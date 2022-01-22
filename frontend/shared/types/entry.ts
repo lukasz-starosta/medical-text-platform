@@ -4,8 +4,11 @@ export interface EntryForm {
 }
 
 export type Entry = {
-  entryID: string
+  id: string
   descriptionLong: string
   descriptionShort: string
-  entryDate: Date
+  entryDate: { seconds: number }
+  problems: string[]
+  tests: string[]
+  treatments: string[]
 }

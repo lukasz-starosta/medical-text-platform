@@ -20,10 +20,10 @@ const Upload = () => {
       <Typography.Title level={3}>Szczegóły diagnozy</Typography.Title>
       <Form<EntryForm> className={styles.formContainer} name="upload" onFinish={onFinish}>
         <Form.Item name="descriptionShort" label="Skrócona diagnoza">
-          <Input />
+          <Input minLength={10} required />
         </Form.Item>
         <Form.Item name="descriptionLong" label="Diagnoza">
-          <Input.TextArea />
+          <Input.TextArea minLength={10} required />
         </Form.Item>
         <Form.Item>
           <Button type="primary" className={styles.submit} htmlType="submit">

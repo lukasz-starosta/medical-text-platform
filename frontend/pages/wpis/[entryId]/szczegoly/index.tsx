@@ -9,18 +9,18 @@ const { Meta } = Card
 
 const PostDetails = () => {
   const router = useRouter()
-  const postId = router.query.postId
+  const entryId = router.query.entryId
   const [entry, setEntry] = useState<Entry>()
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    if (!postId) return
+    if (!entryId) return
     setLoading(true)
     axios
-      .get(API_ENTRY_PATH, { params: { postId } })
+      .get(API_ENTRY_PATH, { params: { entryId } })
       .then(response => setEntry(response.data))
       .finally(() => setLoading(false))
-  }, [postId])
+  }, [entryId])
 
   return (
     <Layout title="Szczegóły">

@@ -5,6 +5,7 @@ import router from 'next/router'
 
 export function interceptRequest(config: AxiosRequestConfig) {
   const token = localStorage.getItem(TOKEN_KEY)
+  debugger
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`
   }

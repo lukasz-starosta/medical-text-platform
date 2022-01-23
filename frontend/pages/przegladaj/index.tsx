@@ -38,7 +38,7 @@ const Browser = () => {
           className={styles.searchBar}
           value={value}
           onChange={e => setValue(e.target.value)}
-          placeholder="Wpisz frazę lub słowo kluczowe"
+          placeholder="Wpisz słowa kluczowe"
           allowClear
           enterButton
           onSearch={onSearch}

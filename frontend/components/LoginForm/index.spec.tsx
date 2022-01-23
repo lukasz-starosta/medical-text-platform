@@ -25,4 +25,7 @@ describe('Tests of LoginForm component', () => {
     expect(await screen.findByText('Wpisz nazwę użytkownika')).toBeInTheDocument()
     expect(await screen.findByText('Wpisz hasło')).toBeInTheDocument()
   })
+  it('example', async () => {
+    expect(1).toEqual(1)
+  })
 })
